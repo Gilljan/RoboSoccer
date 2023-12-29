@@ -18,7 +18,7 @@ export function main() {
 		switch (World.RefereeState) {
 			// Decide on play based on referee and world state
 			case "Game":{
-				currentPlay = new Game(GameState.BPrep);
+				currentPlay = new Game(GameState.Dance);
 				break;
 			}		
 			case "Halt": {

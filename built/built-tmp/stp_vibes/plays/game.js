@@ -1,4 +1,4 @@
-define(["require", "exports", "base/world", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare"], function (require, exports, World, penaltyoffensiveprepare_1, penaltydefenseprepare_1) {
+define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare"], function (require, exports, World, dance_1, penaltyoffensiveprepare_1, penaltydefenseprepare_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Game = exports.currentGameState = exports.locked = exports.GameState = void 0;
@@ -40,6 +40,9 @@ define(["require", "exports", "base/world", "stp_vibes/plays/penaltyoffensivepre
                         new penaltyoffensiveprepare_1.PenaltyOffensivePrepare().run();
                     }
                     break;
+                }
+                case GameState.Dance: {
+                    new dance_1.Dance(World.FriendlyRobots).run();
                 }
             }
         }

@@ -48,9 +48,9 @@ export class Game {
     				break;	
     			
     			}
-    			
-    		
-    		
+    			case GameState.Dance: {
+    				new Dance(World.FriendlyRobots).run();
+    			}
     		}
 	}
 	
