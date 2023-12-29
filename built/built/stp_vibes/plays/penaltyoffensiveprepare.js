@@ -1,4 +1,4 @@
-define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/moveto"], function (require, exports, World, vector_1, moveto_1) {
+define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/moveto", "stp_vibes/skills/shootto"], function (require, exports, World, vector_1, moveto_1, shootto_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.PenaltyOffensivePrepare = exports.currentGameState = exports.locked = exports.GameState = void 0;
@@ -17,19 +17,14 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
             switch (exports.currentGameState) {
                 case GameState.GetBall: {
                     const robot = World.FriendlyRobotsById[1];
-                    robot.setDribblerSpeed(1);
-                    if (robot.hasBall(World.Ball)) {
-                        exports.currentGameState = GameState.Move;
-                    }
-                    else {
-                        let dirTowards = clacDirTowards(World.Ball.pos, robot);
-                        new moveto_1.MoveTo(robot).run(World.Ball.pos, dirTowards, undefined, undefined, { ignoreBall: true });
-                    }
+                    let dirTowards = clacDirTowards(World.Ball.pos, robot);
+                    new shootto_1.ShootTo(robot, new vector_1.Vector(0.0, 4.0)).run();
                     break;
                 }
                 case GameState.Move: {
                     const robot = World.FriendlyRobotsById[1];
-                    new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 4.0), 0);
+                    robot.setDribblerSpeed(1);
+                    new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 4.0), robot.dir);
                     break;
                 }
             }

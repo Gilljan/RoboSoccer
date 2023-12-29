@@ -3,13 +3,15 @@ import {MoveTo} from "stp_vibes/skills/moveto";
 import {Vector} from "base/vector";
 
 
-let count: number = 0;
+let count : number = 0;
 
 enum DancePhase {
     Circle = 1000,
     CircleGrowing = 2000,
     ReverseCircle = 1000
 }
+
+//let phases : DancePhase[] = {Circle, CircleGrowing, ReverseCircle};
 
 let currentPhase = DancePhase.Circle;
 
@@ -91,7 +93,7 @@ export class Dance {
         if (count >= currentPhase) {
             amun.log(Object.values(DancePhase));
             amun.log(Object.values(DancePhase).indexOf(currentPhase));
-            //currentPhase = Object.values(DancePhase)[Object.values(DancePhase).indexOf(currentPhase) + 1];
+            currentPhase = Object.values(DancePhase)[Object.values(DancePhase).indexOf((currentPhase) + 1) % 3];
 
             amun.log(currentPhase);
 

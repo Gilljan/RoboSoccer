@@ -1,53 +1,54 @@
 import * as World from "base/world";
 import {Vector} from "base/vector";
 import {MoveTo} from "stp_vibes/skills/moveto";
-import {PathHelperParameters} from "../../base/trajectory/pathhelper";
-import { FriendlyRobot } from "base/robot";
+import {PathHelperParameters} from "base/trajectory/pathhelper";
+import {FriendlyRobot} from "base/robot";
 import {Passto} from "stp_vibes/skills/passto";
-import {ShootTo} from "../skills/shootto";
+import {ShootTo} from "stp_vibes/skills/shootto";
 
 
 export enum GameState {
-	GetBall,
-	Move
+    GetBall,
+    Move
 }
-export let locked : boolean = false;
-export let currentGameState : GameState = GameState.GetBall;
+
+export let locked: boolean = false;
+export var currentGameState: GameState = GameState.GetBall;
+
 export class PenaltyOffensivePrepare {
 
-	constructor() {
-	
-	}
+    constructor() {
 
-	 run() {
-	 amun.log(currentGameState);
-	 	switch(currentGameState) {
-	 		case GameState.GetBall: {
-			const robot = World.FriendlyRobotsById[1];
-			//const robotBall = World.FriendlyRobotsById[2];
+    }
 
-			robot.setDribblerSpeed(1);
-			
+    run() {
+        amun.log(currentGameState);
+        switch (currentGameState) {
+            case GameState.GetBall: {
+                const robot = World.FriendlyRobotsById[1];
+                //const robotBall = World.FriendlyRobotsById[2];
 
 
-				let dirTowards = clacDirTowards(World.Ball.pos, robot);
-				
-
-				new ShootTo(robot, new Vector(0.0, 4.0)).run();
-				//new Passto(robot, World.FriendlyRobotsById[0]).run();
+                let dirTowards = clacDirTowards(World.Ball.pos, robot);
 
 
-				break;
-			}
-			case GameState.Move: {
-				const robot = World.FriendlyRobotsById[1];
+                new ShootTo(robot, new Vector(0.0, 4.0)).run();
+                //new Passto(robot, World.FriendlyRobotsById[0]).run();
 
-				new MoveTo(robot).run(new Vector(0.0, 4.0), 0);
 
-				break;
-			}
-	 	
-	 	}/*
+                break;
+            }
+            case GameState.Move: {
+                const robot = World.FriendlyRobotsById[1];
+
+                robot.setDribblerSpeed(1);
+
+                new MoveTo(robot).run(new Vector(0.0, 4.0), robot.dir);
+
+                break;
+            }
+
+        }/*
 	 amun.log("Ball:" + World.Ball.pos);
 		const robot = World.FriendlyRobotsById[1];
 		const robotBall = World.FriendlyRobotsById[2];
@@ -55,10 +56,11 @@ export class PenaltyOffensivePrepare {
 		new MoveTo(robot).run(new Vector(0.0, 4.0), 0);
 		new MoveTo(robotBall).run(World.Ball.pos, 0, undefined, undefined, {ignoreBall: false});
 		*/
-	 }
-	
+    }
+
 }
 
-function clacDirTowards(pos:Vector, robot: FriendlyRobot) {
-            return Math.atan2(pos.y - robot.pos.y, pos.x - robot.pos.x);
-        }
+function clacDirTowards(pos: Vector, robot: FriendlyRobot) {
+    return Math.atan2(pos.y - robot.pos.y, pos.x - robot.pos.x);
+}
+

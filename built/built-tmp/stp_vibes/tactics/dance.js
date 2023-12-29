@@ -56,6 +56,7 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
             if (count >= currentPhase) {
                 amun.log(Object.values(DancePhase));
                 amun.log(Object.values(DancePhase).indexOf(currentPhase));
+                currentPhase = Object.values(DancePhase)[Object.values(DancePhase).indexOf((currentPhase) + 1) % 3];
                 amun.log(currentPhase);
                 count = 0;
             }
