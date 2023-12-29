@@ -16,7 +16,18 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
             switch (exports.currentGameState) {
                 case GameState.GetBall: {
                     const robot = World.FriendlyRobotsById[1];
-                    const robotBall = World.FriendlyRobotsById[2];
+                    if (robot.hasBall(World.Ball)) {
+                        exports.currentGameState = GameState.Move;
+                    }
+                    else {
+                        new moveto_1.MoveTo(robot).run(World.Ball.pos, 0);
+                        robot.setDribblerSpeed(1);
+                    }
+                    break;
+                }
+                case GameState.Move: {
+                    const robot = World.FriendlyRobotsById[1];
+                    robot.setDribblerSpeed(1);
                     new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 4.0), 0);
                     break;
                 }

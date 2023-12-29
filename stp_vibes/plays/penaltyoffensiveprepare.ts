@@ -25,19 +25,20 @@ export class PenaltyOffensivePrepare {
 			//const robotBall = World.FriendlyRobotsById[2];
 
 			
-			new MoveTo(robot).run(World.Ball.pos, 0);
-			robot.setDribblerSpeed(1);
 
 			if(robot.hasBall(World.Ball)) {
 				currentGameState = GameState.Move;
+			} else {
+				new MoveTo(robot).run(World.Ball.pos, 0);
+				robot.setDribblerSpeed(1);
 			}
 
 				break;
 			}
 			case GameState.Move: {
 				const robot = World.FriendlyRobotsById[1];
-
-				new MoveTo(robot).run(new Vector(0.0, 4,0), 0);
+				robot.setDribblerSpeed(1);
+				new MoveTo(robot).run(new Vector(0.0, 4.0), 0);
 
 				break;
 			}
