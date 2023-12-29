@@ -4,6 +4,7 @@ import {MoveTo} from "stp_vibes/skills/moveto";
 import {PathHelperParameters} from "../../base/trajectory/pathhelper";
 import { FriendlyRobot } from "base/robot";
 import {Passto} from "stp_vibes/skills/passto";
+import {ShootTo} from "../skills/shootto";
 
 
 export enum GameState {
@@ -28,16 +29,13 @@ export class PenaltyOffensivePrepare {
 			robot.setDribblerSpeed(1);
 			
 
-			if(robot.hasBall(World.Ball)) {
-				currentGameState = GameState.Move;
 
-			} else {
 				let dirTowards = clacDirTowards(World.Ball.pos, robot);
 				
 
-				new MoveTo(robot).run(World.Ball.pos, dirTowards, undefined, undefined, {ignoreBall : true} );
+				new ShootTo(robot, new Vector(0.0, 4.0)).run();
 				//new Passto(robot, World.FriendlyRobotsById[0]).run();
-			}
+
 
 				break;
 			}
