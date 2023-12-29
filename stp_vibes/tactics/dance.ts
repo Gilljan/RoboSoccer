@@ -1,6 +1,7 @@
 import {FriendlyRobot} from "../../base/robot";
 import {MoveTo} from "stp_vibes/skills/moveto";
-import {Vector} from "../../base/vector";
+import {Vector} from "base/vector";
+
 
 let count : number = 0;
 
@@ -9,18 +10,30 @@ export class Dance {
 
     constructor(robots : FriendlyRobot[]) {
         this.robots = robots;
+        
     }
 
     public run() {
-        this.robots.forEach((value, index, array) => {
-            const skill = new MoveTo(value);
+    const centerX = 0; // Set the X-coordinate of the center
+    const centerY = 0; // Set the Y-coordinate of the center
 
-            const y = Math.sin(index / this.robots.length * Math.PI * count);
-            const x = Math.cos(index / this.robots.length * Math.PI * count);
+    this.robots.forEach((value, index, array) => {
+        const skill = new MoveTo(value);
 
-            skill.run(new Vector(x, y), 0);
-        })
+        // Calculate the position in a circle around the center
+        const angle = (index / this.robots.length) * 2 * Math.PI;
+        const radius = 1; // You can adjust the radius as needed
 
-        count++;
-    }
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+
+        // Use the count variable to control the rotation
+        const orientation = count * (index / this.robots.length) * 360; // Assuming degrees, adjust if using radians
+
+        skill.run(new Vector(x, y), orientation);
+    });
+
+    count++;
+}
+
 }

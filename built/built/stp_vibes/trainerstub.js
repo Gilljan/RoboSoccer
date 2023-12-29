@@ -1,8 +1,8 @@
-define(["require", "exports", "base/world", "stp_vibes/plays/game", "stp_vibes/plays/halt", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare"], function (require, exports, World, game_1, halt_1, penaltyoffensiveprepare_1, penaltydefenseprepare_1) {
+define(["require", "exports", "base/world", "stp_vibes/plays/game", "stp_vibes/plays/halt", "stp_vibes/plays/game"], function (require, exports, World, game_1, halt_1, game_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.main = void 0;
-    let currentPlay = new game_1.Game();
+    let currentPlay = new game_1.Game(game_2.GameState.NULL);
     function redecide_play() {
         return true;
     }
@@ -10,7 +10,7 @@ define(["require", "exports", "base/world", "stp_vibes/plays/game", "stp_vibes/p
         if (redecide_play()) {
             switch (World.RefereeState) {
                 case "Game": {
-                    currentPlay = new game_1.Game();
+                    currentPlay = new game_1.Game(game_2.GameState.BPrep);
                     break;
                 }
                 case "Halt": {
@@ -18,11 +18,9 @@ define(["require", "exports", "base/world", "stp_vibes/plays/game", "stp_vibes/p
                     break;
                 }
                 case "PenaltyOffensivePrepare": {
-                    currentPlay = new penaltyoffensiveprepare_1.PenaltyOffensivePrepare();
                     break;
                 }
                 case "PenaltyDefensivePrepare": {
-                    currentPlay = new penaltydefenseprepare_1.PenaltyDefensePrepare();
                     break;
                 }
             }

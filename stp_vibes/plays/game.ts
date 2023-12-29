@@ -1,16 +1,59 @@
 import * as World from "base/world";
 import {Vector} from "base/vector";
 import {MoveTo} from "stp_vibes/skills/moveto";
-import {Dance} from "../tactics/dance";
+import {Dance} from "stp_vibes/tactics/dance";
+import { PenaltyOffensivePrepare } from "stp_vibes/plays/penaltyoffensiveprepare";
+import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
 
+let dance : Dance;
+export enum GameState {
+	NULL,
+	BPrep,
+	YPrep,
+	BShoot,
+	YShoot,
+	BEnd,
+	YEnd,
+	Dance
+}
+export let locked : boolean = false;
+export let currentGameState : GameState;
 export class Game {
 
-	constructor() {
-
+	
+	constructor(startWith : GameState) {
+		currentGameState = startWith;
+	 //dance = new Dance(World.FriendlyRobots);
 	}
 
 	run() {
-    		//amun.log("Game Play loop");
-    		new Dance(World.FriendlyRobots).run();
+    		//dance.run();
+    		switch(currentGameState) {
+    			case GameState.BPrep: {
+    				//amun.log("executed");
+    				locked = true;
+    					
+    				if(World.TeamIsBlue) {
+    					new PenaltyOffensivePrepare().run();
+    				} else { new PenaltyDefensePrepare().run(); }
+    				break;	
+    			}
+    			case GameState.YPrep: {
+    				locked = true;
+    					
+    				if(World.TeamIsBlue) {
+    					new PenaltyDefensePrepare().run();
+    				} else { new PenaltyOffensivePrepare().run(); }
+    				
+    				break;	
+    			
+    			}
+    			
+    		
+    		
+    		}
 	}
+	
+	
+	
 }

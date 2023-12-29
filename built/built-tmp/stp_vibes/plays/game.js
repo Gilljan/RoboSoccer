@@ -1,20 +1,47 @@
-define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/moveto"], function (require, exports, World, vector_1, moveto_1) {
+define(["require", "exports", "base/world", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare"], function (require, exports, World, penaltyoffensiveprepare_1, penaltydefenseprepare_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Game = void 0;
+    exports.Game = exports.currentGameState = exports.locked = exports.GameState = void 0;
+    let dance;
+    var GameState;
+    (function (GameState) {
+        GameState[GameState["NULL"] = 0] = "NULL";
+        GameState[GameState["BPrep"] = 1] = "BPrep";
+        GameState[GameState["YPrep"] = 2] = "YPrep";
+        GameState[GameState["BShoot"] = 3] = "BShoot";
+        GameState[GameState["YShoot"] = 4] = "YShoot";
+        GameState[GameState["BEnd"] = 5] = "BEnd";
+        GameState[GameState["YEnd"] = 6] = "YEnd";
+        GameState[GameState["Dance"] = 7] = "Dance";
+    })(GameState = exports.GameState || (exports.GameState = {}));
+    exports.locked = false;
     class Game {
-        constructor() {
+        constructor(startWith) {
+            exports.currentGameState = startWith;
         }
         run() {
-            amun.log(World.Ball.pos);
-            let a = 0;
-            World.FriendlyRobots.forEach((robot, index, robots) => {
-                const play = new moveto_1.MoveTo(robot);
-                const y = Math.sin(a / World.FriendlyRobots.length * Math.PI * 2);
-                const x = Math.cos(a / World.FriendlyRobots.length * Math.PI * 2);
-                play.run(new vector_1.Vector(Math.floor(Math.random()) * 2, Math.floor(Math.random() * 2)), 0);
-                a++;
-            });
+            switch (exports.currentGameState) {
+                case GameState.BPrep: {
+                    exports.locked = true;
+                    if (World.TeamIsBlue) {
+                        new penaltyoffensiveprepare_1.PenaltyOffensivePrepare().run();
+                    }
+                    else {
+                        new penaltydefenseprepare_1.PenaltyDefensePrepare().run();
+                    }
+                    break;
+                }
+                case GameState.YPrep: {
+                    exports.locked = true;
+                    if (World.TeamIsBlue) {
+                        new penaltydefenseprepare_1.PenaltyDefensePrepare().run();
+                    }
+                    else {
+                        new penaltyoffensiveprepare_1.PenaltyOffensivePrepare().run();
+                    }
+                    break;
+                }
+            }
         }
     }
     exports.Game = Game;
