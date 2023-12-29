@@ -22,15 +22,25 @@ export class PenaltyOffensivePrepare {
 	 	switch(currentGameState) {
 	 		case GameState.GetBall: {
 			const robot = World.FriendlyRobotsById[1];
-			const robotBall = World.FriendlyRobotsById[2];
+			//const robotBall = World.FriendlyRobotsById[2];
+
 			
-			
-			
-			new MoveTo(robot).run(new Vector(0.0, 4.0), 0);
-			//new Passto(robotBall, robot).run();
-	 			break;
-	 		}
-	 		
+			new MoveTo(robot).run(World.Ball.pos, 0);
+			robot.setDribblerSpeed(1);
+
+			if(robot.hasBall(World.Ball)) {
+				currentGameState = GameState.Move;
+			}
+
+				break;
+			}
+			case GameState.Move: {
+				const robot = World.FriendlyRobotsById[1];
+
+				new MoveTo(robot).run(new Vector(0.0, 4,0), 0);
+
+				break;
+			}
 	 	
 	 	}/*
 	 amun.log("Ball:" + World.Ball.pos);
