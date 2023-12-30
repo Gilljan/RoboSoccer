@@ -43,7 +43,7 @@ export class PenaltyOffensivePrepare {
 
                 robot.setDribblerSpeed(1);
 
-                new MoveTo(robot).run(new Vector(0.0, 3.85), robot.dir, undefined, undefined, {ignoreDefenseArea: true});
+                new MoveTo(robot).run(new Vector(0.0, 3.85), robot.dir, undefined, undefined, {ignoreDefenseArea: true, ignoreBall: true});
                 //amun.log(robot.speed);
 
                 const vector: Vector = robot.pos;
@@ -81,7 +81,7 @@ export class PenaltyOffensivePrepare {
                     } else (Game.currentGameState as any) = Game.GameState.YShoot;
                     currentGameState = GameState.GetBall;
                     //amun.log(currentGameState);
-                } else new MoveTo(robot).run(new Vector(0.0, 2.0), robot.dir, 1.0, undefined, {ignoreDefenseArea: true});
+                } else new MoveTo(robot).run(new Vector(0.0, 2.0), robot.dir, 1.0, undefined, {ignoreDefenseArea: true, ignoreBall: true});
                 
                 break;
             }

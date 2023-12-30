@@ -48,11 +48,11 @@ export class ShootTo {
         let isOnShootingPosition = shootPositionOffseted.sub(this.robot.pos).length() < offset + 0.1;
 
         if (!isOnShootingPosition || orientationDifference > orientationThreshold) {
-            obstacles = {ignoreBall: false, ignorePenaltyDistance: true};
+            obstacles = {ignoreBall: false, ignorePenaltyDistance: true, ignoreDefenseArea: true};
             setDefaultObstaclesByTable(this.robot.path, this.robot, obstacles);
             this.robot.trajectory.update(CurvedMaxAccel, shootPositionOffseted, shootingPositionDir);
         } else {
-            obstacles = {ignoreBall: true, ignorePenaltyDistance: true};
+            obstacles = {ignoreBall: true, ignorePenaltyDistance: true, ignoreDefenseArea: true};
             setDefaultObstaclesByTable(this.robot.path, this.robot, obstacles);
             this.robot.trajectory.update(CurvedMaxAccel, shootPosition, dirTowards);
 
