@@ -1,6 +1,4 @@
 import * as World from "base/world";
-import {Vector} from "base/vector";
-import {MoveTo} from "stp_vibes/skills/moveto";
 import {Dance} from "stp_vibes/tactics/dance";
 import * as PenaltyOffensivePrepare from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
@@ -26,6 +24,7 @@ export let locked: boolean = false;
 export let currentGameState: GameState = GameState.NULL;
 export let shoots: number = 0;//has to be 10 in the end
 export let counter: number = 0;
+
 export class Game {
 
     constructor() {
@@ -37,9 +36,9 @@ export class Game {
         //dance.run();
         if (shoots >= 10) {
             counter++;
-            if(counter == 300){
-	    	currentGameState = GameState.Dance;
-	    } 
+            if (counter == 300) {
+                currentGameState = GameState.Dance;
+            }
             //amun.log("GS: " + currentGameState);
         }
         amun.log("GS: " + currentGameState);

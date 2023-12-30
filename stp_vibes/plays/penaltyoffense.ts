@@ -2,7 +2,6 @@ import * as World from "base/world";
 import {ShootTo} from "stp_vibes/skills/shootto";
 import * as Game from "stp_vibes/plays/game";
 import {Vector} from "base/vector";
-import {FriendlyRobot} from "base/robot";
 
 let count: number = 0;
 let random: number = generateRandomNumber(-1.1, 1.1, 4);

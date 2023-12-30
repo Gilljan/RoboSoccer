@@ -1,10 +1,6 @@
 import * as World from "base/world";
 import {Game} from "stp_vibes/plays/game";
 import {Halt} from "stp_vibes/plays/halt";
-import {PenaltyOffensivePrepare} from "stp_vibes/plays/penaltyoffensiveprepare";
-import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
-import {GameState} from "stp_vibes/plays/game";
-//import { Play } from "stp_vibes/plays/playstub"
 
 let currentPlay = new Game();
 

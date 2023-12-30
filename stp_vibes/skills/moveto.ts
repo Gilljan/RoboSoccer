@@ -4,7 +4,7 @@ import {setDefaultObstaclesByTable, PathHelperParameters} from "base/trajectory/
 import {Position, Vector} from "base/vector";
 
 export class MoveTo {
-    private robot: FriendlyRobot;
+    private readonly robot: FriendlyRobot;
 
     constructor(robot: FriendlyRobot) {
         this.robot = robot;

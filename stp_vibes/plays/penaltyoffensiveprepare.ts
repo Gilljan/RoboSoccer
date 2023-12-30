@@ -5,7 +5,6 @@ import {FriendlyRobot} from "base/robot";
 import {ShootTo} from "stp_vibes/skills/shootto";
 import * as Game from "stp_vibes/plays/game";
 
-
 export enum GameState {
     GetBall,
     Move,

@@ -1,11 +1,9 @@
 import "base/base";
 import "base/entrypoints";
 import * as debug from "base/debug";
-import * as vis from "base/vis";
 import * as plot from "base/plot";
 import * as World from "base/world";
 import * as EntryPoints from "base/entrypoints";
-import {log} from "base/amun";
 import {main as trainer} from "stp_vibes/trainerstub";
 
 function main(): boolean {

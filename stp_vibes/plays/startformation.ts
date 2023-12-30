@@ -15,7 +15,7 @@ export class StartFormation {
             const skill = new MoveTo(value);
 
 
-            skill.run(new Vector(3.0, 0.0 + index), 0);
+            skill.run(new Vector(3.0, index), 0);
         });
 
         count++;
