@@ -24,7 +24,7 @@ export class ShootTo {
     // maxSpeed is a helpful parameter to adjust for e.g. in stop state where the robots are not allowed to move faster than a certain speed
     run() {
 
-        let obstacles: PathHelperParameters = {ignoreBall: false};
+        let obstacles: PathHelperParameters;
         //get the position of the other Player
         let otherPlayerPosition: Vector = this.target;
         //get the  poosition of the ball
@@ -48,11 +48,11 @@ export class ShootTo {
         let isOnShootingPosition = shootPositionOffseted.sub(this.robot.pos).length() < offset + 0.1;
 
         if (!isOnShootingPosition || orientationDifference > orientationThreshold) {
-            obstacles = {ignoreBall: false};
+            obstacles = {ignoreBall: false, ignorePenaltyDistance: true};
             setDefaultObstaclesByTable(this.robot.path, this.robot, obstacles);
             this.robot.trajectory.update(CurvedMaxAccel, shootPositionOffseted, shootingPositionDir);
         } else {
-            obstacles = {ignoreBall: true};
+            obstacles = {ignoreBall: true, ignorePenaltyDistance: true};
             setDefaultObstaclesByTable(this.robot.path, this.robot, obstacles);
             this.robot.trajectory.update(CurvedMaxAccel, shootPosition, dirTowards);
 
