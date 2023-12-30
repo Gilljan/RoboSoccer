@@ -10,7 +10,8 @@ let count: number = 0;
 enum DancePhase {
     Circle,
     CircleGrowing,
-    ReverseCircle
+    ReverseCircle,
+    CircleUneven
 }
 
 //let phases : DancePhase[] = {Circle, CircleGrowing, ReverseCircle};
@@ -34,7 +35,7 @@ export class Dance {
                         return;
                     }
 
-                    const vec = this.calcRotatedPos(index, false, 2);
+                    const vec = this.calcRotatedPos(index, false, (_) => 2);
 
                     // Use the count variable to control the rotation
                     const orientation = count * (index / this.robots.length) * 360;
@@ -51,7 +52,7 @@ export class Dance {
                         return;
                     }
 
-                    const vec = this.calcRotatedPos(index, false, 2 + Math.cos(count / 500));
+                    const vec = this.calcRotatedPos(index, false, (_) => 2 + Math.cos(count / 500));
 
                     // Use the count variable to control the rotation
                     const orientation = count * (index / this.robots.length) * 360;
@@ -68,13 +69,30 @@ export class Dance {
                         return;
                     }
 
-                    const vec = this.calcRotatedPos(index, true, 2);
+                    const vec = this.calcRotatedPos(index, true, (_) => 2);
 
                     // Use the count variable to control the rotation
                     const orientation = count * (index / this.robots.length) * 360;
 
                     skill.run(vec, 0);
                 });
+            }
+            case DancePhase.CircleUneven: {
+                this.robots.forEach((value, index, array) => {
+                    const skill = new MoveTo(value);
+
+                    if (this.moveKeeper(value, index)) {
+                        return;
+                    }
+
+                    const vec = this.calcRotatedPos(index, false, (index) => index % 2 == 0 ? 2 : 2 + Math.cos(count / 500));
+
+                    // Use the count variable to control the rotation
+                    const orientation = count * (index / this.robots.length) * 360;
+
+                    skill.run(vec, 0);
+                });
+                break;
             }
         }
 
@@ -99,21 +117,26 @@ export class Dance {
         return false;
     }
 
-    calcRotatedPos(index: number, reverse: boolean, radius: number): Vector {
+    calcRotatedPos(index: number, reverse: boolean, radius: (index: number) => number): Vector {
         // Calculate the position in a circle around the center
         const angle = ((index + (reverse ? -count : count) / 500) / this.robots.length) * 2 * Math.PI;
 
-        const x = centerX + radius * Math.cos(angle);
-        const y = centerY + radius * Math.sin(angle);
+        const x = centerX + radius(index) * Math.cos(angle);
+        const y = centerY + radius(index) * Math.sin(angle);
 
         return new Vector(x, y);
     }
-    
+
     getPhaseLength(phase: DancePhase): number {
         switch (phase) {
-            case DancePhase.Circle: return 1000;
-            case DancePhase.CircleGrowing: return 2000;
-            case DancePhase.ReverseCircle: return 1000;
+            case DancePhase.Circle:
+                return 1000;
+            case DancePhase.CircleGrowing:
+                return 2000;
+            case DancePhase.ReverseCircle:
+                return 1000;
+            case DancePhase.CircleUneven:
+                return 2000;
         }
     }
 }
