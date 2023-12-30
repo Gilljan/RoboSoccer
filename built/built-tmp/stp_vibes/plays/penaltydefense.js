@@ -1,7 +1,8 @@
-define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vector"], function (require, exports, World, moveto_1, vector_1) {
+define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vector", "stp_vibes/plays/game"], function (require, exports, World, moveto_1, vector_1, Game) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.PenaltyDefense = void 0;
+    let started = false;
     let count = 0;
     let targetX = 0;
     class PenaltyDefense {
@@ -10,10 +11,12 @@ define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vec
         run() {
             const robot = World.FriendlyRobotsById[0];
             const play = new moveto_1.MoveTo(robot);
+            if (!started) {
+                started = World.Ball.speed.x != 0 || World.Ball.speed.y != 0;
+            }
             if (count % 50 == 0) {
                 const min = 0;
                 const max = 10;
-                amun.log(vectorDistance(robot.pos, World.Ball.pos) < 2.0);
                 if (vectorDistance(robot.pos, World.Ball.pos) < 3.0) {
                     targetX = World.Ball.pos.x;
                 }
@@ -23,6 +26,14 @@ define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vec
             }
             play.run(new vector_1.Vector(targetX, robot.pos.y), 0);
             count++;
+            if (started && World.Ball.speed.equals(new vector_1.Vector(0, 0))) {
+                if (Game.currentGameState == Game.GameState.BShoot) {
+                    Game.currentGameState = Game.GameState.BEnd;
+                }
+                else {
+                    Game.currentGameState = Game.GameState.YEnd;
+                }
+            }
         }
     }
     exports.PenaltyDefense = PenaltyDefense;

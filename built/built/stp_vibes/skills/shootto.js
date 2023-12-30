@@ -38,7 +38,12 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
                     else {
                         this.robot.shoot(10);
                         if (!this.robot.hasBall(World.Ball, 0.02)) {
-                            Game.currentGameState = Game.GameState.BEnd;
+                            amun.log("!!!!!!!!!!!");
+                            if (Game.currentGameState == Game.GameState.BShoot) {
+                                Game.currentGameState = Game.GameState.BEnd;
+                            }
+                            else
+                                Game.currentGameState = Game.GameState.YEnd;
                         }
                     }
                 }

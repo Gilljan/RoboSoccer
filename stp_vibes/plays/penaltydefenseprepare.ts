@@ -18,7 +18,7 @@ export class PenaltyDefensePrepare {
 
         play.run(new Vector(0.0, -6.0), 0);
 
-amun.log(vectorDistance(World.Ball.pos, new Vector(0.0, -3.85));
+//amun.log(vectorDistance(World.Ball.pos, new Vector(0.0, -3.85));
         if(vectorDistance(World.Ball.pos, new Vector(0.0, -3.85)) < 0.3) {
             if(Game.currentGameState == Game.GameState.BPrep) {
                 (Game.currentGameState as any) = Game.GameState.BShoot;

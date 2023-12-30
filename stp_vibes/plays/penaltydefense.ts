@@ -1,7 +1,7 @@
 import * as World from "base/world";
 import {MoveTo} from "stp_vibes/skills/moveto";
 import {Vector} from "base/vector";
-import * as Game from "./game";
+import * as Game from "stp_vibes/plays/game";
 
 let started: boolean = false;
 
@@ -22,6 +22,7 @@ export class PenaltyDefense {
         if (!started) {
             started = World.Ball.speed.x != 0 || World.Ball.speed.y != 0;
         }
+        //amun.log(started);
 
         if (count % 50 == 0) {
 
@@ -41,7 +42,8 @@ export class PenaltyDefense {
 
         count++;
 
-        if (started && World.Ball.pos.equals(new Vector(0, 0))) {
+	//amun.log(World.Ball.speed);
+        if (started && World.Ball.speed.equals(new Vector(0, 0))) {
             if (Game.currentGameState == Game.GameState.BShoot) {
                 (Game.currentGameState as any) = Game.GameState.BEnd;
             } else {

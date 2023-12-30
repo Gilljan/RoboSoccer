@@ -64,7 +64,10 @@ export class ShootTo {
                 } else {
                 this.robot.shoot(10);
                 if(!this.robot.hasBall(World.Ball, 0.02)) {
-                (Game.currentGameState as any) = Game.GameState.BEnd;
+                amun.log("!!!!!!!!!!!");
+                if(Game.currentGameState == Game.GameState.BShoot) {
+                    (Game.currentGameState as any) = Game.GameState.BEnd;
+                } else (Game.currentGameState as any) = Game.GameState.YEnd;
                 }}
                 //amun.log("Shoot");
                 //this.robot.shoot(10);

@@ -36,7 +36,7 @@ export class Game {
         //dance.run();
         if (!World.TeamIsBlue) {
 
-            amun.log("GS: " + currentGameState);
+            //amun.log("GS: " + currentGameState);
         }
         switch (currentGameState) {
             case GameState.BPrep: {

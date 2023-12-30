@@ -21,7 +21,6 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
         }
         run() {
             if (!World.TeamIsBlue) {
-                amun.log("GS: " + exports.currentGameState);
             }
             switch (exports.currentGameState) {
                 case GameState.BPrep: {

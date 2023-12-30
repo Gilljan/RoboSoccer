@@ -9,7 +9,6 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
             const robot = World.FriendlyRobotsById[0];
             const play = new moveto_1.MoveTo(robot);
             play.run(new vector_1.Vector(0.0, -6.0), 0);
-            amun.log(vectorDistance(World.Ball.pos, new vector_1.Vector(0.0, -3.85)));
             if (vectorDistance(World.Ball.pos, new vector_1.Vector(0.0, -3.85)) < 0.3) {
                 if (Game.currentGameState == Game.GameState.BPrep) {
                     Game.currentGameState = Game.GameState.BShoot;

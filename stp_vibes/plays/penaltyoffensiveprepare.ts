@@ -55,7 +55,10 @@ export class PenaltyOffensivePrepare {
 
                     //amun.log(Game.currentGameState);
                     //robot.setDribblerSpeed(0);
+                    if(vetorDistance(neededPos, World.Ball.pos) < 0.5) {
+                    
                     currentGameState = GameState.Finished;
+                    } else currentGameState = GameState.GetBall;
 
                 }
 
@@ -63,15 +66,22 @@ export class PenaltyOffensivePrepare {
                 break;
             }
             case GameState.Finished: {
-            
+                const neededPos: Vector = new Vector(0.0, 3.85);
+           
                 const robot = World.FriendlyRobotsById[1];
                 if(vetorDistance(robot.pos, new Vector(0.0, 2.0)) < 0.025) {
+                if(vetorDistance(neededPos, World.Ball.pos) > 0.5) {
+                currentGameState = GameState.GetBall;
+                break;
+                    }
+
+                
                     if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == Game.GameState.BShoot) {
                         (Game.currentGameState as any) = Game.GameState.BShoot;
                     } else (Game.currentGameState as any) = Game.GameState.YShoot;
                     currentGameState = GameState.GetBall;
                     //amun.log(currentGameState);
-                } else new MoveTo(robot).run(new Vector(0.0, 2.0), robot.dir) ;
+                } else new MoveTo(robot).run(new Vector(0.0, 2.0), robot.dir, 1.0) ;
                 
                 break;
             }

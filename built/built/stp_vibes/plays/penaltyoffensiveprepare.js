@@ -28,13 +28,22 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                     const vector = robot.pos;
                     const neededPos = new vector_1.Vector(0.0, 3.85);
                     if (vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
-                        exports.currentGameState = GameState.Finished;
+                        if (vetorDistance(neededPos, World.Ball.pos) < 0.5) {
+                            exports.currentGameState = GameState.Finished;
+                        }
+                        else
+                            exports.currentGameState = GameState.GetBall;
                     }
                     break;
                 }
                 case GameState.Finished: {
+                    const neededPos = new vector_1.Vector(0.0, 3.85);
                     const robot = World.FriendlyRobotsById[1];
                     if (vetorDistance(robot.pos, new vector_1.Vector(0.0, 2.0)) < 0.025) {
+                        if (vetorDistance(neededPos, World.Ball.pos) > 0.5) {
+                            exports.currentGameState = GameState.GetBall;
+                            break;
+                        }
                         if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == Game.GameState.BShoot) {
                             Game.currentGameState = Game.GameState.BShoot;
                         }
@@ -43,7 +52,7 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                         exports.currentGameState = GameState.GetBall;
                     }
                     else
-                        new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 2.0), robot.dir);
+                        new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 2.0), robot.dir, 1.0);
                     break;
                 }
             }

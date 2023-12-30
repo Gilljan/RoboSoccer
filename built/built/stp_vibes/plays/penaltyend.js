@@ -10,7 +10,7 @@ define(["require", "exports", "base/world", "stp_vibes/plays/game", "base/vector
             new moveto_1.MoveTo(robot).run(defense ? new vector_1.Vector(0, -6) : new vector_1.Vector(3.5, 2.5), robot.dir);
             if (!defense) {
                 if (vectorDistance(robot.pos, new vector_1.Vector(3.5, 2.5)) < 0.1) {
-                    if (Game.GameState.BEnd) {
+                    if (Game.currentGameState == Game.GameState.BEnd) {
                         Game.currentGameState = Game.GameState.YPrep;
                     }
                     else
@@ -20,11 +20,14 @@ define(["require", "exports", "base/world", "stp_vibes/plays/game", "base/vector
             else {
                 const opponentRobot = World.OpponentRobotsById[1];
                 if (vectorDistance(opponentRobot.pos, new vector_1.Vector(-3.5, -2.5)) < 0.1) {
-                    if (Game.GameState.BEnd) {
+                    if (Game.currentGameState == Game.GameState.BEnd) {
                         Game.currentGameState = Game.GameState.YPrep;
+                        amun.log("#1");
                     }
-                    else
+                    else {
                         Game.currentGameState = Game.GameState.BPrep;
+                        amun.log("#2");
+                    }
                 }
             }
         }

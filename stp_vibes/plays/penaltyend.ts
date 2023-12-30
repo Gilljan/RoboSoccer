@@ -18,7 +18,7 @@ export class PenaltyEnd {
 
         if(!defense) {
             if(vectorDistance(robot.pos, new Vector(3.5, 2.5)) < 0.1) {
-                if(Game.GameState.BEnd) {
+                if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;
                 } else (Game.currentGameState as any) = Game.GameState.BPrep;
             }
@@ -26,9 +26,10 @@ export class PenaltyEnd {
             const opponentRobot = World.OpponentRobotsById[1];
 
             if(vectorDistance(opponentRobot.pos, new Vector(-3.5, -2.5)) < 0.1) {
-                if(Game.GameState.BEnd) {
+                if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;
-                } else (Game.currentGameState as any) = Game.GameState.BPrep;
+                    amun.log("#1");
+                } else {(Game.currentGameState as any) = Game.GameState.BPrep; amun.log("#2");}
             }
         }
     }
