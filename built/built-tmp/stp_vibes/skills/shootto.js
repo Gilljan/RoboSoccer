@@ -44,6 +44,8 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
                             }
                             else
                                 Game.currentGameState = Game.GameState.YEnd;
+                            Game.shoots = Game.shoots + 1;
+                            amun.log(Game.shoots);
                         }
                     }
                 }

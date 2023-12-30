@@ -23,7 +23,7 @@ export enum GameState {
 
 export let locked: boolean = false;
 export let currentGameState: GameState = GameState.BPrep;
-
+export let shoots: number = 0;//has to be 10 in the end
 
 export class Game {
 

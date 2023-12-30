@@ -1,7 +1,7 @@
 define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare", "stp_vibes/plays/penaltyoffense", "stp_vibes/plays/penaltyend", "stp_vibes/plays/penaltydefense"], function (require, exports, World, dance_1, PenaltyOffensivePrepare, penaltydefenseprepare_1, penaltyoffense_1, penaltyend_1, penaltydefense_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.Game = exports.currentGameState = exports.locked = exports.GameState = void 0;
+    exports.Game = exports.shoots = exports.currentGameState = exports.locked = exports.GameState = void 0;
     let dance;
     var GameState;
     (function (GameState) {
@@ -16,6 +16,7 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
     })(GameState = exports.GameState || (exports.GameState = {}));
     exports.locked = false;
     exports.currentGameState = GameState.BPrep;
+    exports.shoots = 0;
     class Game {
         constructor() {
         }

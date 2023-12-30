@@ -68,6 +68,8 @@ export class ShootTo {
                 if(Game.currentGameState == Game.GameState.BShoot) {
                     (Game.currentGameState as any) = Game.GameState.BEnd;
                 } else (Game.currentGameState as any) = Game.GameState.YEnd;
+                Game.shoots = Game.shoots + 1;
+                amun.log(Game.shoots);
                 }}
                 //amun.log("Shoot");
                 //this.robot.shoot(10);
