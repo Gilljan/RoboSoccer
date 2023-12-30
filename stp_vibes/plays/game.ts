@@ -7,6 +7,7 @@ import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
 import {PenaltyOffense} from "stp_vibes/plays/penaltyoffense";
 import {PenaltyEnd} from "stp_vibes/plays/penaltyend";
 import {PenaltyDefense} from "stp_vibes/plays/penaltydefense";
+import {StartFormation} from "./startformation";
 
 let dance: Dance;
 
@@ -22,7 +23,7 @@ export enum GameState {
 }
 
 export let locked: boolean = false;
-export let currentGameState: GameState = GameState.BPrep;
+export let currentGameState: GameState = GameState.NULL;
 export let shoots: number = 0;//has to be 10 in the end
 
 export class Game {
@@ -39,6 +40,10 @@ export class Game {
             //amun.log("GS: " + currentGameState);
         }
         switch (currentGameState) {
+            case GameState.NULL: {
+                new StartFormation().run();
+                break;
+            }
             case GameState.BPrep: {
                 //amun.log("executed");
                 locked = true;
