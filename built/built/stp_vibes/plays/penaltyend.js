@@ -17,6 +17,16 @@ define(["require", "exports", "base/world", "stp_vibes/plays/game", "base/vector
                         Game.currentGameState = Game.GameState.BPrep;
                 }
             }
+            else {
+                const opponentRobot = World.OpponentRobotsById[1];
+                if (vectorDistance(opponentRobot.pos, new vector_1.Vector(-3.5, -2.5)) < 0.1) {
+                    if (Game.GameState.BEnd) {
+                        Game.currentGameState = Game.GameState.YPrep;
+                    }
+                    else
+                        Game.currentGameState = Game.GameState.BPrep;
+                }
+            }
         }
     }
     exports.PenaltyEnd = PenaltyEnd;

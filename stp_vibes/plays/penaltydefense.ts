@@ -3,7 +3,7 @@ import {MoveTo} from "stp_vibes/skills/moveto";
 import {Vector} from "base/vector";
 
 let count: number = 0;
-let random: number = 0;
+let targetX: number = 0;
 
 export class PenaltyDefense {
 
@@ -16,19 +16,22 @@ export class PenaltyDefense {
 
         const play = new MoveTo(robot);
 
-        if (count % 200 == 0) {
+        if (count % 50 == 0) {
 
             const min = 0;
-            const max = 17;
+            const max = 10;
 
-            if (vectorDistance(robot.pos, World.Ball.pos) < 2.0) {
-                play.run(new Vector(World.Ball.pos.x, robot.pos.y), 0);
+amun.log(vectorDistance(robot.pos, World.Ball.pos) < 2.0);
+            if (vectorDistance(robot.pos, World.Ball.pos) < 3.0) {
+                 targetX = World.Ball.pos.x
 
             } else {
-                random = (Math.floor(Math.random() * (max - min + 1)) + min - 10) / 10;
-                play.run(new Vector(random, robot.pos.y), 0);
+                targetX = (Math.floor(Math.random() * (max - min + 1)) + min - 5) / 10;
+
             }
+            
         }
+        play.run(new Vector(targetX, robot.pos.y), 0);
 
         count++;
     }
