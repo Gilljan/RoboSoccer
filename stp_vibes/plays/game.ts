@@ -4,6 +4,7 @@ import {MoveTo} from "stp_vibes/skills/moveto";
 import {Dance} from "stp_vibes/tactics/dance";
 import {PenaltyOffensivePrepare} from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
+import {PenaltyOffense} from "stp_vibes/plays/penaltyoffense";
 
 let dance: Dance;
 
@@ -56,6 +57,7 @@ export class Game {
             }
             case GameState.BShoot: {
                 amun.log("BSHOOT");
+                new PenaltyOffense().run();
                 break;
             }
             case GameState.YShoot: {

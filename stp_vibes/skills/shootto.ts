@@ -9,11 +9,13 @@ import {GameState} from "stp_vibes/plays/penaltyoffensiveprepare";
 export class ShootTo {
     private robot: FriendlyRobot;
     private target: Vector;
+    private prep: boolean;
 
 
-    constructor(robot: FriendlyRobot, target: Vector) {
+    constructor(robot: FriendlyRobot, target: Vector, prep: boolean) {
         this.robot = robot;
         this.target = target;
+        this.prep = prep;
     }
 
     // obstacles has an empty object as default, because that means none of the path helper parameters are set and the default is used
@@ -56,9 +58,11 @@ export class ShootTo {
             let reaced = this.robot.hasBall(World.Ball, 0.1);
 
             if (reaced && Math.abs(this.robot.dir - dirTowards) < 0.1) {
+                if(this.prep) {
+                    PenaltyOffensivePrepare.currentGameState = GameState.Move;
+                } else this.robot.shoot(10);
                 //amun.log("Shoot");
                 //this.robot.shoot(10);
-                PenaltyOffensivePrepare.currentGameState = GameState.Move;
             }
         }
 
