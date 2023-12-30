@@ -17,11 +17,16 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
     exports.locked = false;
     exports.currentGameState = GameState.BPrep;
     exports.shoots = 0;
+    let counter = 0;
     class Game {
         constructor() {
         }
         run() {
-            if (!World.TeamIsBlue) {
+            if (exports.shoots >= 2) {
+                counter++;
+                if (counter == 500) {
+                    exports.currentGameState = GameState.Dance;
+                }
             }
             switch (exports.currentGameState) {
                 case GameState.BPrep: {

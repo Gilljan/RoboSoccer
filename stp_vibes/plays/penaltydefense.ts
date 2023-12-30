@@ -49,6 +49,7 @@ export class PenaltyDefense {
             } else {
                 (Game.currentGameState as any) = Game.GameState.YEnd;
             }
+            Game.shoots = Game.shoots + 1;
         }
     }
 }

@@ -24,7 +24,7 @@ export enum GameState {
 export let locked: boolean = false;
 export let currentGameState: GameState = GameState.BPrep;
 export let shoots: number = 0;//has to be 10 in the end
-
+let counter: number = 0;
 export class Game {
 
     constructor() {
@@ -34,8 +34,11 @@ export class Game {
 
     run() {
         //dance.run();
-        if (!World.TeamIsBlue) {
-
+        if (shoots >= 2) {
+            counter++;
+            if(counter == 300){
+	    	currentGameState = GameState.Dance;
+	    } 
             //amun.log("GS: " + currentGameState);
         }
         switch (currentGameState) {

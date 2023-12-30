@@ -33,6 +33,7 @@ define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vec
                 else {
                     Game.currentGameState = Game.GameState.YEnd;
                 }
+                Game.shoots = Game.shoots + 1;
             }
         }
     }
