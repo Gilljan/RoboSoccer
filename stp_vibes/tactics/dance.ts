@@ -52,7 +52,7 @@ export class Dance {
                         return;
                     }
 
-                    const vec = this.calcRotatedPos(index, false, (_) => 2 + Math.cos(count / 500));
+                    const vec = this.calcRotatedPos(index, false, (_) => 2 + Math.cos(count / 400));
 
                     // Use the count variable to control the rotation
                     const orientation = count * (index / this.robots.length) * 360;
@@ -76,6 +76,7 @@ export class Dance {
 
                     skill.run(vec, 0);
                 });
+                break;
             }
             case DancePhase.CircleUneven: {
                 this.robots.forEach((value, index, array) => {
@@ -85,7 +86,7 @@ export class Dance {
                         return;
                     }
 
-                    const vec = this.calcRotatedPos(index, false, (index) => index % 2 == 0 ? 2 : 2 + Math.cos(count / 500));
+                    const vec = this.calcRotatedPos(index, false, (index) => index % 2 == 0 ? 2 : 2 + Math.cos(count / 400));
 
                     // Use the count variable to control the rotation
                     const orientation = count * (index / this.robots.length) * 360;
@@ -99,7 +100,7 @@ export class Dance {
         count++;
 
         if (count >= this.getPhaseLength(currentPhase)) {
-            currentPhase = Object.keys(DancePhase)[(currentPhase + 1) % 3] | undefined;
+            currentPhase = Object.keys(DancePhase)[(currentPhase + 1) % 4] | undefined;
 
             amun.log(currentPhase);
 
@@ -119,7 +120,7 @@ export class Dance {
 
     calcRotatedPos(index: number, reverse: boolean, radius: (index: number) => number): Vector {
         // Calculate the position in a circle around the center
-        const angle = ((index + (reverse ? -count : count) / 500) / this.robots.length) * 2 * Math.PI;
+        const angle = ((index + (reverse ? -count : count) / 400) / this.robots.length) * 2 * Math.PI;
 
         const x = centerX + radius(index) * Math.cos(angle);
         const y = centerY + radius(index) * Math.sin(angle);

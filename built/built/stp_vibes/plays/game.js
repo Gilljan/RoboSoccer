@@ -1,4 +1,4 @@
-define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare", "stp_vibes/plays/penaltyoffense", "stp_vibes/plays/penaltyend"], function (require, exports, World, dance_1, penaltyoffensiveprepare_1, penaltydefenseprepare_1, penaltyoffense_1, penaltyend_1) {
+define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare", "stp_vibes/plays/penaltyoffense", "stp_vibes/plays/penaltyend"], function (require, exports, World, dance_1, PenaltyOffensivePrepare, penaltydefenseprepare_1, penaltyoffense_1, penaltyend_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Game = exports.currentGameState = exports.locked = exports.GameState = void 0;
@@ -15,7 +15,7 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
         GameState[GameState["Dance"] = 7] = "Dance";
     })(GameState = exports.GameState || (exports.GameState = {}));
     exports.locked = false;
-    exports.currentGameState = GameState.BPrep;
+    exports.currentGameState = GameState.Dance;
     class Game {
         constructor() {
         }
@@ -24,7 +24,8 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
                 case GameState.BPrep: {
                     exports.locked = true;
                     if (World.TeamIsBlue) {
-                        new penaltyoffensiveprepare_1.PenaltyOffensivePrepare().run();
+                        PenaltyOffensivePrepare.currentGameState = PenaltyOffensivePrepare.GameState.GetBall;
+                        new PenaltyOffensivePrepare.PenaltyOffensivePrepare().run();
                     }
                     else {
                         new penaltydefenseprepare_1.PenaltyDefensePrepare().run();
@@ -37,7 +38,8 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
                         new penaltydefenseprepare_1.PenaltyDefensePrepare().run();
                     }
                     else {
-                        new penaltyoffensiveprepare_1.PenaltyOffensivePrepare().run();
+                        PenaltyOffensivePrepare.currentGameState = PenaltyOffensivePrepare.GameState.GetBall;
+                        new PenaltyOffensivePrepare.PenaltyOffensivePrepare().run();
                     }
                     break;
                 }

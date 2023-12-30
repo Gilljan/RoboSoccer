@@ -2,8 +2,9 @@ import * as World from "base/world";
 import {Vector} from "base/vector";
 import {MoveTo} from "stp_vibes/skills/moveto";
 import {Dance} from "stp_vibes/tactics/dance";
-import {PenaltyOffensivePrepare} from "stp_vibes/plays/penaltyoffensiveprepare";
+import * as PenaltyOffensivePrepare from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
+import {PenaltyOffensivePrepare} from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyOffense} from "stp_vibes/plays/penaltyoffense";
 import {PenaltyEnd} from "stp_vibes/plays/penaltyend";
 
@@ -21,7 +22,7 @@ export enum GameState {
 }
 
 export let locked: boolean = false;
-export let currentGameState: GameState = GameState.BPrep;
+export let currentGameState: GameState = GameState.Dance;
 
 export class Game {
 
@@ -38,7 +39,8 @@ export class Game {
                 locked = true;
 
                 if (World.TeamIsBlue) {
-                    new PenaltyOffensivePrepare().run();
+                    (PenaltyOffensivePrepare.currentGameState as any) = PenaltyOffensivePrepare.GameState.GetBall;
+                    new PenaltyOffensivePrepare.PenaltyOffensivePrepare().run();
                 } else {
                     new PenaltyDefensePrepare().run();
                 }
@@ -50,7 +52,8 @@ export class Game {
                 if (World.TeamIsBlue) {
                     new PenaltyDefensePrepare().run();
                 } else {
-                    new PenaltyOffensivePrepare().run();
+                    (PenaltyOffensivePrepare.currentGameState as any) = PenaltyOffensivePrepare.GameState.GetBall;
+                    new PenaltyOffensivePrepare.PenaltyOffensivePrepare().run();
                 }
 
                 break;

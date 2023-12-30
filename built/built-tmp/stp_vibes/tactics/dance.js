@@ -37,7 +37,7 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
                         if (this.moveKeeper(value, index)) {
                             return;
                         }
-                        const vec = this.calcRotatedPos(index, false, (_) => 2 + Math.cos(count / 500));
+                        const vec = this.calcRotatedPos(index, false, (_) => 2 + Math.cos(count / 400));
                         const orientation = count * (index / this.robots.length) * 360;
                         skill.run(vec, 0);
                     });
@@ -53,6 +53,7 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
                         const orientation = count * (index / this.robots.length) * 360;
                         skill.run(vec, 0);
                     });
+                    break;
                 }
                 case DancePhase.CircleUneven: {
                     this.robots.forEach((value, index, array) => {
@@ -60,7 +61,7 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
                         if (this.moveKeeper(value, index)) {
                             return;
                         }
-                        const vec = this.calcRotatedPos(index, false, (index) => index % 2 == 0 ? 2 : 2 + Math.cos(count / 500));
+                        const vec = this.calcRotatedPos(index, false, (index) => index % 2 == 0 ? 2 : 2 + Math.cos(count / 400));
                         const orientation = count * (index / this.robots.length) * 360;
                         skill.run(vec, 0);
                     });
@@ -69,7 +70,7 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
             }
             count++;
             if (count >= this.getPhaseLength(currentPhase)) {
-                currentPhase = Object.keys(DancePhase)[(currentPhase + 1) % 3] | undefined;
+                currentPhase = Object.keys(DancePhase)[(currentPhase + 1) % 4] | undefined;
                 amun.log(currentPhase);
                 count = 0;
             }
@@ -82,7 +83,7 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
             return false;
         }
         calcRotatedPos(index, reverse, radius) {
-            const angle = ((index + (reverse ? -count : count) / 500) / this.robots.length) * 2 * Math.PI;
+            const angle = ((index + (reverse ? -count : count) / 400) / this.robots.length) * 2 * Math.PI;
             const x = centerX + radius(index) * Math.cos(angle);
             const y = centerY + radius(index) * Math.sin(angle);
             return new vector_1.Vector(x, y);
