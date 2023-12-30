@@ -45,11 +45,11 @@ export class PenaltyOffensivePrepare {
 
                 robot.setDribblerSpeed(1);
 
-                new MoveTo(robot).run(new Vector(0.0, 3.95), robot.dir);
+                new MoveTo(robot).run(new Vector(0.0, 3.85), robot.dir);
                 //amun.log(robot.speed);
 
                 const vector: Vector = robot.pos;
-                const neededPos: Vector = new Vector(0.0, 3.95);
+                const neededPos: Vector = new Vector(0.0, 3.85);
 
                 if (vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
                     //amun.log("Moving finished => shooting phase")
@@ -67,12 +67,12 @@ export class PenaltyOffensivePrepare {
             case GameState.Finished: {
             
                 const robot = World.FriendlyRobotsById[1];
-            if(vetorDistance(robot.pos, new Vector(0.0, 3.0)) < 0.025) {
+            if(vetorDistance(robot.pos, new Vector(0.0, 2.0)) < 0.025) {
 		    
                     if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
                     (Game.currentGameState as any) = Game.GameState.BShoot;
                 } else (Game.currentGameState as any) = Game.GameState.YShoot;
-                    } else new MoveTo(robot).run(new Vector(0.0, 3.7), robot.dir) ;
+                    } else new MoveTo(robot).run(new Vector(0.0, 2.0), robot.dir) ;
                 
                 break;
             }

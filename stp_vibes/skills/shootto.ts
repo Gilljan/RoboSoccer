@@ -5,6 +5,7 @@ import {Vector} from "base/vector";
 import * as World from "base/world";
 import * as PenaltyOffensivePrepare from "stp_vibes/plays/penaltyoffensiveprepare";
 import {GameState} from "stp_vibes/plays/penaltyoffensiveprepare";
+import * as Game from "stp_vibes/plays/game";
 
 export class ShootTo {
     private robot: FriendlyRobot;
@@ -60,7 +61,11 @@ export class ShootTo {
             if (reaced && Math.abs(this.robot.dir - dirTowards) < 0.1) {
                 if(this.prep) {
                     PenaltyOffensivePrepare.currentGameState = GameState.Move;
-                } else {this.robot.shoot(10);}
+                } else {
+                this.robot.shoot(10);
+                if(!this.robot.hasBall(World.Ball, 0.02)) {
+                (Game.currentGameState as any) = Game.GameState.BEnd;
+                }}
                 //amun.log("Shoot");
                 //this.robot.shoot(10);
             }

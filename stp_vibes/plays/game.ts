@@ -20,7 +20,7 @@ export enum GameState {
 }
 
 export let locked: boolean = false;
-export let currentGameState: GameState = GameState.Dance;
+export let currentGameState: GameState = GameState.BPrep;
 
 export class Game {
 

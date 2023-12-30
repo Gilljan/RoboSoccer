@@ -1,4 +1,4 @@
-define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory/pathhelper", "base/world", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltyoffensiveprepare"], function (require, exports, curvedmaxaccel_1, pathhelper_1, World, PenaltyOffensivePrepare, penaltyoffensiveprepare_1) {
+define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory/pathhelper", "base/world", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/game"], function (require, exports, curvedmaxaccel_1, pathhelper_1, World, PenaltyOffensivePrepare, penaltyoffensiveprepare_1, Game) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ShootTo = void 0;
@@ -37,6 +37,9 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
                     }
                     else {
                         this.robot.shoot(10);
+                        if (!this.robot.hasBall(World.Ball, 0.02)) {
+                            Game.currentGameState = Game.GameState.BEnd;
+                        }
                     }
                 }
             }

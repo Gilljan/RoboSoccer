@@ -15,7 +15,7 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
         GameState[GameState["Dance"] = 7] = "Dance";
     })(GameState = exports.GameState || (exports.GameState = {}));
     exports.locked = false;
-    exports.currentGameState = GameState.Dance;
+    exports.currentGameState = GameState.BPrep;
     class Game {
         constructor() {
         }
