@@ -6,7 +6,7 @@ import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
 import {GameState} from "stp_vibes/plays/game";
 //import { Play } from "stp_vibes/plays/playstub"
 
-let currentPlay = new Game(GameState.NULL);
+let currentPlay = new Game();
 
 function redecide_play(): boolean {
     // Decide if you want to change your current play
