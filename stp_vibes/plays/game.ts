@@ -35,13 +35,14 @@ export class Game {
 
     run() {
         //dance.run();
-        if (shoots >= 2) {
+        if (shoots >= 10) {
             counter++;
             if(counter == 300){
 	    	currentGameState = GameState.Dance;
 	    } 
             //amun.log("GS: " + currentGameState);
         }
+        amun.log("GS: " + currentGameState);
         switch (currentGameState) {
             case GameState.NULL: {
                 new StartFormation().run();
