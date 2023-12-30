@@ -1,4 +1,4 @@
-define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare"], function (require, exports, World, dance_1, penaltyoffensiveprepare_1, penaltydefenseprepare_1) {
+define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare", "stp_vibes/plays/penaltyoffense"], function (require, exports, World, dance_1, penaltyoffensiveprepare_1, penaltydefenseprepare_1, penaltyoffense_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Game = exports.currentGameState = exports.locked = exports.GameState = void 0;
@@ -15,7 +15,7 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
         GameState[GameState["Dance"] = 7] = "Dance";
     })(GameState = exports.GameState || (exports.GameState = {}));
     exports.locked = false;
-    exports.currentGameState = GameState.BPrep;
+    exports.currentGameState = GameState.Dance;
     class Game {
         constructor() {
         }
@@ -42,7 +42,11 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
                     break;
                 }
                 case GameState.BShoot: {
-                    amun.log("BSHOOT");
+                    if (World.TeamIsBlue) {
+                        new penaltyoffense_1.PenaltyOffense().run();
+                    }
+                    else {
+                    }
                     break;
                 }
                 case GameState.YShoot: {

@@ -60,7 +60,7 @@ export class ShootTo {
             if (reaced && Math.abs(this.robot.dir - dirTowards) < 0.1) {
                 if(this.prep) {
                     PenaltyOffensivePrepare.currentGameState = GameState.Move;
-                } else this.robot.shoot(10);
+                } else {this.robot.shoot(10);}
                 //amun.log("Shoot");
                 //this.robot.shoot(10);
             }

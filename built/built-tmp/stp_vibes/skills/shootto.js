@@ -3,9 +3,10 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ShootTo = void 0;
     class ShootTo {
-        constructor(robot, target) {
+        constructor(robot, target, prep) {
             this.robot = robot;
             this.target = target;
+            this.prep = prep;
         }
         run() {
             let obstacles = { ignoreBall: false };
@@ -31,7 +32,12 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
                 this.robot.trajectory.update(curvedmaxaccel_1.CurvedMaxAccel, shootPosition, dirTowards);
                 let reaced = this.robot.hasBall(World.Ball, 0.1);
                 if (reaced && Math.abs(this.robot.dir - dirTowards) < 0.1) {
-                    PenaltyOffensivePrepare.currentGameState = penaltyoffensiveprepare_1.GameState.Move;
+                    if (this.prep) {
+                        PenaltyOffensivePrepare.currentGameState = penaltyoffensiveprepare_1.GameState.Move;
+                    }
+                    else {
+                        this.robot.shoot(10);
+                    }
                 }
             }
             function clacDirTowards(pos, robot) {

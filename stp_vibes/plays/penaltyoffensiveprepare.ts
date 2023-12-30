@@ -34,7 +34,7 @@ export class PenaltyOffensivePrepare {
                 let dirTowards = clacDirTowards(World.Ball.pos, robot);
 
 
-                new ShootTo(robot, new Vector(0.0, 4.0)).run();
+                new ShootTo(robot, new Vector(0.0, 3.95), true).run();
                 //new Passto(robot, World.FriendlyRobotsById[0]).run();
 
 
@@ -45,28 +45,35 @@ export class PenaltyOffensivePrepare {
 
                 robot.setDribblerSpeed(1);
 
-                new MoveTo(robot).run(new Vector(0.0, 4.0), robot.dir);
-                amun.log(robot.speed);
+                new MoveTo(robot).run(new Vector(0.0, 3.95), robot.dir);
+                //amun.log(robot.speed);
 
                 const vector: Vector = robot.pos;
-                const neededPos: Vector = new Vector(0.0, 4.0);
+                const neededPos: Vector = new Vector(0.0, 3.95);
 
                 if (vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
-                    amun.log("Moving finished => shooting phase")
+                    //amun.log("Moving finished => shooting phase")
 
 
-                    amun.log(Game.currentGameState);
-
+                    //amun.log(Game.currentGameState);
+                    //robot.setDribblerSpeed(0);
                     currentGameState = GameState.Finished;
+
                 }
 
 
                 break;
             }
             case GameState.Finished: {
-                if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
+            
+                const robot = World.FriendlyRobotsById[1];
+            if(vetorDistance(robot.pos, new Vector(0.0, 3.0)) < 0.025) {
+		    
+                    if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
                     (Game.currentGameState as any) = Game.GameState.BShoot;
                 } else (Game.currentGameState as any) = Game.GameState.YShoot;
+                    } else new MoveTo(robot).run(new Vector(0.0, 3.7), robot.dir) ;
+                
                 break;
             }
 

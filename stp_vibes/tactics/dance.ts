@@ -8,9 +8,9 @@ let centerY: number = 0;
 let count: number = 0;
 
 enum DancePhase {
-    Circle = 1000,
-    CircleGrowing = 2000,
-    ReverseCircle = 1000
+    Circle,
+    CircleGrowing,
+    ReverseCircle
 }
 
 //let phases : DancePhase[] = {Circle, CircleGrowing, ReverseCircle};
@@ -63,10 +63,8 @@ export class Dance {
 
         count++;
 
-        if (count >= currentPhase) {
-            amun.log(Object.values(DancePhase));
-            amun.log(Object.values(DancePhase).indexOf(currentPhase));
-            currentPhase = Object.values(DancePhase)[(currentPhase + 1) % 3];
+        if (count >= this.getPhaseLength(currentPhase)) {
+            currentPhase = Object.keys(DancePhase)[(currentPhase + 1) % 3] | undefined;
 
             amun.log(currentPhase);
 
@@ -93,5 +91,13 @@ export class Dance {
         const y = centerY + radius * Math.sin(angle);
 
         return new Vector(x, y);
+    }
+    
+    getPhaseLength(phase: DancePhase): number {
+        switch (phase) {
+            case DancePhase.Circle: return 1000;
+            case DancePhase.CircleGrowing: return 2000;
+            case DancePhase.ReverseCircle: return 1000;
+        }
     }
 }

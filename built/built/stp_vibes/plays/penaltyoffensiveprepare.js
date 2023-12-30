@@ -19,29 +19,31 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                 case GameState.GetBall: {
                     const robot = World.FriendlyRobotsById[1];
                     let dirTowards = clacDirTowards(World.Ball.pos, robot);
-                    new shootto_1.ShootTo(robot, new vector_1.Vector(0.0, 4.0)).run();
+                    new shootto_1.ShootTo(robot, new vector_1.Vector(0.0, 3.95), true).run();
                     break;
                 }
                 case GameState.Move: {
                     const robot = World.FriendlyRobotsById[1];
                     robot.setDribblerSpeed(1);
-                    new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 4.0), robot.dir);
-                    amun.log(robot.speed);
+                    new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 3.95), robot.dir);
                     const vector = robot.pos;
-                    const neededPos = new vector_1.Vector(0.0, 4.0);
+                    const neededPos = new vector_1.Vector(0.0, 3.95);
                     if (vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
-                        amun.log("Moving finished => shooting phase");
-                        amun.log(Game.currentGameState);
                         exports.currentGameState = GameState.Finished;
                     }
                     break;
                 }
                 case GameState.Finished: {
-                    if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
-                        Game.currentGameState = Game.GameState.BShoot;
+                    const robot = World.FriendlyRobotsById[1];
+                    if (vetorDistance(robot.pos, new vector_1.Vector(0.0, 3.0)) < 0.025) {
+                        if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
+                            Game.currentGameState = Game.GameState.BShoot;
+                        }
+                        else
+                            Game.currentGameState = Game.GameState.YShoot;
                     }
                     else
-                        Game.currentGameState = Game.GameState.YShoot;
+                        new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 3.7), robot.dir);
                     break;
                 }
             }

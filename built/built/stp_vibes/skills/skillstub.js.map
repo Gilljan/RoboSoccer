@@ -1,1 +1,1 @@
-{"version":3,"file":"skillstub.js","sourceRoot":"","sources":["../../../../stp_vibes/skills/skillstub.ts"],"names":[],"mappings":";;;;IAEA,MAAa,cAAc;QAG1B,YAAY,KAAoB;YAC/B,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;QACpB,CAAC;QAED,GAAG;QAEH,CAAC;KACD;IAVD,wCAUC"}
+{"version":3,"file":"skillstub.js","sourceRoot":"","sources":["../../../../stp_vibes/skills/skillstub.ts"],"names":[],"mappings":";;;;IAEA,MAAa,cAAc;QAIvB,YAAY,KAAoB;YAC5B,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;QACvB,CAAC;QAED,GAAG;QAEH,CAAC;KACJ;IAXD,wCAWC"}

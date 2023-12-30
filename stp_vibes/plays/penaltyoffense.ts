@@ -15,7 +15,7 @@ export class PenaltyOffense {
 
         const random = generateRandomNumber(-1.1, 1.1, 4);
 
-        new ShootTo(robot, new Vector(random, 6.1), false);
+        new ShootTo(robot, new Vector(-1.0, 6.1), false).run();
     }
 }
 
@@ -34,5 +34,6 @@ function generateRandomNumber(min: number, max: number, decimalPlaces: number): 
     // Begrenze die Anzahl der Dezimalstellen
     randomNumber = parseFloat(randomNumber.toFixed(decimalPlaces));
 
+amun.log(randomNumber);
     return randomNumber;
 }
