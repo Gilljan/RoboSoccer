@@ -1,4 +1,4 @@
-define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare", "stp_vibes/plays/penaltyoffense"], function (require, exports, World, dance_1, penaltyoffensiveprepare_1, penaltydefenseprepare_1, penaltyoffense_1) {
+define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare", "stp_vibes/plays/penaltyoffense", "stp_vibes/plays/penaltyend"], function (require, exports, World, dance_1, penaltyoffensiveprepare_1, penaltydefenseprepare_1, penaltyoffense_1, penaltyend_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Game = exports.currentGameState = exports.locked = exports.GameState = void 0;
@@ -50,7 +50,19 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
                     break;
                 }
                 case GameState.YShoot: {
-                    amun.log("YSHOOT");
+                    if (!World.TeamIsBlue) {
+                        new penaltyoffense_1.PenaltyOffense().run();
+                    }
+                    else {
+                    }
+                    break;
+                }
+                case GameState.BEnd: {
+                    new penaltyend_1.PenaltyEnd().run(!World.TeamIsBlue);
+                    break;
+                }
+                case GameState.YEnd: {
+                    new penaltyend_1.PenaltyEnd().run(World.TeamIsBlue);
                     break;
                 }
                 case GameState.Dance: {

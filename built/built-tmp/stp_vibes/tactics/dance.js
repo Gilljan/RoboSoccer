@@ -10,6 +10,7 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
         DancePhase[DancePhase["Circle"] = 0] = "Circle";
         DancePhase[DancePhase["CircleGrowing"] = 1] = "CircleGrowing";
         DancePhase[DancePhase["ReverseCircle"] = 2] = "ReverseCircle";
+        DancePhase[DancePhase["CircleUneven"] = 3] = "CircleUneven";
     })(DancePhase || (DancePhase = {}));
     let currentPhase = DancePhase.Circle;
     class Dance {
@@ -24,7 +25,19 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
                         if (this.moveKeeper(value, index)) {
                             return;
                         }
-                        const vec = this.calcRotatedPos(index, false);
+                        const vec = this.calcRotatedPos(index, false, (_) => 2);
+                        const orientation = count * (index / this.robots.length) * 360;
+                        skill.run(vec, 0);
+                    });
+                    break;
+                }
+                case DancePhase.CircleGrowing: {
+                    this.robots.forEach((value, index, array) => {
+                        const skill = new moveto_1.MoveTo(value);
+                        if (this.moveKeeper(value, index)) {
+                            return;
+                        }
+                        const vec = this.calcRotatedPos(index, false, (_) => 2 + Math.cos(count / 500));
                         const orientation = count * (index / this.robots.length) * 360;
                         skill.run(vec, 0);
                     });
@@ -36,10 +49,22 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
                         if (this.moveKeeper(value, index)) {
                             return;
                         }
-                        const vec = this.calcRotatedPos(index, true);
+                        const vec = this.calcRotatedPos(index, true, (_) => 2);
                         const orientation = count * (index / this.robots.length) * 360;
                         skill.run(vec, 0);
                     });
+                }
+                case DancePhase.CircleUneven: {
+                    this.robots.forEach((value, index, array) => {
+                        const skill = new moveto_1.MoveTo(value);
+                        if (this.moveKeeper(value, index)) {
+                            return;
+                        }
+                        const vec = this.calcRotatedPos(index, false, (index) => index % 2 == 0 ? 2 : 2 + Math.cos(count / 500));
+                        const orientation = count * (index / this.robots.length) * 360;
+                        skill.run(vec, 0);
+                    });
+                    break;
                 }
             }
             count++;
@@ -56,18 +81,22 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
             }
             return false;
         }
-        calcRotatedPos(index, reverse) {
+        calcRotatedPos(index, reverse, radius) {
             const angle = ((index + (reverse ? -count : count) / 500) / this.robots.length) * 2 * Math.PI;
-            const radius = 2 + Math.cos(count / 500);
-            const x = centerX + radius * Math.cos(angle);
-            const y = centerY + radius * Math.sin(angle);
+            const x = centerX + radius(index) * Math.cos(angle);
+            const y = centerY + radius(index) * Math.sin(angle);
             return new vector_1.Vector(x, y);
         }
         getPhaseLength(phase) {
             switch (phase) {
-                case DancePhase.Circle: return 1000;
-                case DancePhase.CircleGrowing: return 2000;
-                case DancePhase.ReverseCircle: return 1000;
+                case DancePhase.Circle:
+                    return 1000;
+                case DancePhase.CircleGrowing:
+                    return 2000;
+                case DancePhase.ReverseCircle:
+                    return 1000;
+                case DancePhase.CircleUneven:
+                    return 2000;
             }
         }
     }

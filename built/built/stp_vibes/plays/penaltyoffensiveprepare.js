@@ -36,7 +36,7 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                 case GameState.Finished: {
                     const robot = World.FriendlyRobotsById[1];
                     if (vetorDistance(robot.pos, new vector_1.Vector(0.0, 2.0)) < 0.025) {
-                        if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
+                        if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == Game.GameState.BShoot) {
                             Game.currentGameState = Game.GameState.BShoot;
                         }
                         else
