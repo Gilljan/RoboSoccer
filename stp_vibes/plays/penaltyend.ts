@@ -12,12 +12,14 @@ export class PenaltyEnd {
     }
 
     run(defense: boolean) {
-        const robot = defense ? World.FriendlyRobotsById[0] : World.FriendlyRobotsById[1];
+        const robot = defense ? World.FriendlyRobotsById[0] : World.FriendlyRobotsById[(Game.counter % 4)+1];
 
-        new MoveTo(robot).run(defense ? new Vector(0, -6) : new Vector(3.5, 2.5), robot.dir);
+        var index = (Game.counter % 4)+1;
+
+        new MoveTo(robot).run(defense ? new Vector(0, -6) : new Vector(3.0, 0.0 + index), robot.dir);
 
         if(!defense) {
-            if(vectorDistance(robot.pos, new Vector(3.5, 2.5)) < 0.1) {
+            if(vectorDistance(robot.pos, new Vector(3.0, 0.0 + index)) < 0.1) {
                 if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;
                 } else (Game.currentGameState as any) = Game.GameState.BPrep;
@@ -25,11 +27,10 @@ export class PenaltyEnd {
         } else {
             const opponentRobot = World.OpponentRobotsById[1];
 
-            if(vectorDistance(opponentRobot.pos, new Vector(-3.5, -2.5)) < 0.1) {
+            if(vectorDistance(opponentRobot.pos, new Vector(3.0, 0.0 + index)) < 0.1) {
                 if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;
-                    amun.log("#1");
-                } else {(Game.currentGameState as any) = Game.GameState.BPrep; amun.log("#2");}
+                } else {(Game.currentGameState as any) = Game.GameState.BPrep;}
             }
         }
     }

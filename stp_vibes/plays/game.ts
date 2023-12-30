@@ -25,7 +25,7 @@ export enum GameState {
 export let locked: boolean = false;
 export let currentGameState: GameState = GameState.NULL;
 export let shoots: number = 0;//has to be 10 in the end
-let counter: number = 0;
+export let counter: number = 0;
 export class Game {
 
     constructor() {
