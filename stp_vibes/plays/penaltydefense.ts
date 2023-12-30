@@ -25,18 +25,14 @@ export class PenaltyDefense {
         //amun.log(started);
 
         if (count % 50 == 0) {
-
             const min = 0;
             const max = 10;
 
-            if (vectorDistance(robot.pos, World.Ball.pos) < 3.0) {
+            if (vectorDistance(robot.pos, World.Ball.pos) < 2.5) {
                  targetX = World.Ball.pos.x
-
             } else {
                 targetX = (Math.floor(Math.random() * (max - min + 1)) + min - 5) / 10;
-
             }
-            
         }
         play.run(new Vector(targetX, robot.pos.y), 0);
 

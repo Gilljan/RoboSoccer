@@ -14,8 +14,6 @@ enum DancePhase {
     CircleUneven
 }
 
-//let phases : DancePhase[] = {Circle, CircleGrowing, ReverseCircle};
-
 let currentPhase = DancePhase.Circle;
 
 export class Dance {

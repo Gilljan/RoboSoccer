@@ -7,6 +7,9 @@ import * as PenaltyOffensivePrepare from "stp_vibes/plays/penaltyoffensiveprepar
 import {GameState} from "stp_vibes/plays/penaltyoffensiveprepare";
 import * as Game from "stp_vibes/plays/game";
 
+let offset: number = 0.6;
+let orientationThreshold: number = 10 * (Math.PI / 180);
+
 export class ShootTo {
     private readonly robot: FriendlyRobot;
     private readonly target: Vector;
@@ -20,22 +23,17 @@ export class ShootTo {
 
     run() {
         let obstacles: PathHelperParameters;
-        let targetPos: Vector = this.target;
-        let ballPosition: Vector = World.Ball.pos;
-
-        let offset = 0.6;
+        let ballPos: Vector = World.Ball.pos;
 
         //move behind the ball facing the player
-        let ballToOther: Vector = targetPos.sub(ballPosition).normalized();
-        let shootPositionOffseted = ballPosition.add(ballToOther.mul(-offset));
-        let shootPosition = ballPosition.add(ballToOther.mul(-0.04));
-        let dirTowards = calcDirTowards(ballPosition, this.robot);
+        let ballToOther: Vector = this.target.sub(ballPos).normalized();
+        let shootPositionOffseted = ballPos.add(ballToOther.mul(-offset));
+        let shootPosition = ballPos.add(ballToOther.mul(-0.04));
+        let dirTowards = calcDirTowards(ballPos, this.robot);
         let shootingPositionDir = calcDirTowards(shootPosition, this.robot);
 
         // Calculate the difference in orientation
         let orientationDifference = Math.abs(this.robot.dir - dirTowards);
-        // Define a threshold for orientation alignment (e.g., 10 degrees in radians)
-        let orientationThreshold = 10 * (Math.PI / 180);
 
         let isOnShootingPosition = shootPositionOffseted.sub(this.robot.pos).length() < offset + 0.1;
 
