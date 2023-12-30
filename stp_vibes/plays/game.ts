@@ -7,7 +7,7 @@ import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
 import {PenaltyOffense} from "stp_vibes/plays/penaltyoffense";
 import {PenaltyEnd} from "stp_vibes/plays/penaltyend";
 import {PenaltyDefense} from "stp_vibes/plays/penaltydefense";
-import {StartFormation} from "./startformation";
+import {StartFormation} from "stp_vibes/plays/startformation";
 
 let dance: Dance;
 

@@ -12,13 +12,10 @@ export class StartFormation {
 
     run() {
         World.FriendlyRobots.forEach((value, index, array) => {
-            if (index == 0) {
-                return;
-            }
-
             const skill = new MoveTo(value);
 
-            skill.run(new Vector(3.0 + index - 1, 0.0), 0);
+
+            skill.run(new Vector(3.0, 0.0 + index), 0);
         });
 
         count++;

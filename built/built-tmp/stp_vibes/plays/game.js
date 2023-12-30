@@ -1,4 +1,4 @@
-define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare", "stp_vibes/plays/penaltyoffense", "stp_vibes/plays/penaltyend", "stp_vibes/plays/penaltydefense"], function (require, exports, World, dance_1, PenaltyOffensivePrepare, penaltydefenseprepare_1, penaltyoffense_1, penaltyend_1, penaltydefense_1) {
+define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibes/plays/penaltyoffensiveprepare", "stp_vibes/plays/penaltydefenseprepare", "stp_vibes/plays/penaltyoffense", "stp_vibes/plays/penaltyend", "stp_vibes/plays/penaltydefense", "stp_vibes/plays/startformation"], function (require, exports, World, dance_1, PenaltyOffensivePrepare, penaltydefenseprepare_1, penaltyoffense_1, penaltyend_1, penaltydefense_1, startformation_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Game = exports.shoots = exports.currentGameState = exports.locked = exports.GameState = void 0;
@@ -15,7 +15,7 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
         GameState[GameState["Dance"] = 7] = "Dance";
     })(GameState = exports.GameState || (exports.GameState = {}));
     exports.locked = false;
-    exports.currentGameState = GameState.BPrep;
+    exports.currentGameState = GameState.NULL;
     exports.shoots = 0;
     let counter = 0;
     class Game {
@@ -24,11 +24,15 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
         run() {
             if (exports.shoots >= 2) {
                 counter++;
-                if (counter == 500) {
+                if (counter == 300) {
                     exports.currentGameState = GameState.Dance;
                 }
             }
             switch (exports.currentGameState) {
+                case GameState.NULL: {
+                    new startformation_1.StartFormation().run();
+                    break;
+                }
                 case GameState.BPrep: {
                     exports.locked = true;
                     if (World.TeamIsBlue) {
