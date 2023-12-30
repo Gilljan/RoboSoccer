@@ -31,14 +31,17 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                     const neededPos = new vector_1.Vector(0.0, 4.0);
                     if (vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
                         amun.log("Moving finished => shooting phase");
-                        if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
-                            Game.currentGameState = Game.GameState.BShoot;
-                        }
-                        else
-                            Game.currentGameState = Game.GameState.YShoot;
                         amun.log(Game.currentGameState);
                         exports.currentGameState = GameState.Finished;
                     }
+                    break;
+                }
+                case GameState.Finished: {
+                    if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
+                        Game.currentGameState = Game.GameState.BShoot;
+                    }
+                    else
+                        Game.currentGameState = Game.GameState.YShoot;
                     break;
                 }
             }

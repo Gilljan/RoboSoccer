@@ -10,7 +10,7 @@ define(["require", "exports", "base/world", "stp_vibes/plays/game", "stp_vibes/p
         if (redecide_play()) {
             switch (World.RefereeState) {
                 case "Game": {
-                    currentPlay = new game_1.Game(game_2.GameState.BPrep);
+                    currentPlay = new game_1.Game();
                     break;
                 }
                 case "Halt": {

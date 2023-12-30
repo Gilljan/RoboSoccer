@@ -17,12 +17,12 @@ export enum GameState {
 	Dance
 }
 export let locked : boolean = false;
-export let currentGameState : GameState;
+export let currentGameState : GameState = GameState.BPrep;
 export class Game {
 
 	
-	constructor(startWith : GameState) {
-		currentGameState = startWith;
+	constructor() {
+		//currentGameState = startWith;
 	 //dance = new Dance(World.FriendlyRobots);
 	}
 	run() {

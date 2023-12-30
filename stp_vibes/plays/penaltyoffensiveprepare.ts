@@ -54,9 +54,6 @@ export class PenaltyOffensivePrepare {
                 if(vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
                     amun.log("Moving finished => shooting phase")
                     
-                    if(Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
-                        (Game.currentGameState as any) = Game.GameState.BShoot;
-                    } else (Game.currentGameState as any) = Game.GameState.YShoot;
                     
                     amun.log(Game.currentGameState);
                     
@@ -64,6 +61,12 @@ export class PenaltyOffensivePrepare {
                 }
                 
 
+                break;
+            }
+            case GameState.Finished: {
+                if(Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
+                    (Game.currentGameState as any) = Game.GameState.BShoot;
+                } else (Game.currentGameState as any) = Game.GameState.YShoot;
                 break;
             }
 
