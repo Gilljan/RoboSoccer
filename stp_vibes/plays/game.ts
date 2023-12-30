@@ -4,7 +4,6 @@ import {MoveTo} from "stp_vibes/skills/moveto";
 import {Dance} from "stp_vibes/tactics/dance";
 import * as PenaltyOffensivePrepare from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
-import {PenaltyOffensivePrepare} from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyOffense} from "stp_vibes/plays/penaltyoffense";
 import {PenaltyEnd} from "stp_vibes/plays/penaltyend";
 import {PenaltyDefense} from "stp_vibes/plays/penaltydefense";
