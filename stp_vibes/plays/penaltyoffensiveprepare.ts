@@ -47,24 +47,24 @@ export class PenaltyOffensivePrepare {
 
                 new MoveTo(robot).run(new Vector(0.0, 4.0), robot.dir);
                 amun.log(robot.speed);
-                
-                const vector : Vector = robot.pos;
-                const neededPos : Vector =  new Vector(0.0, 4.0);
-                
-                if(vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
+
+                const vector: Vector = robot.pos;
+                const neededPos: Vector = new Vector(0.0, 4.0);
+
+                if (vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
                     amun.log("Moving finished => shooting phase")
-                    
-                    
+
+
                     amun.log(Game.currentGameState);
-                    
+
                     currentGameState = GameState.Finished;
                 }
-                
+
 
                 break;
             }
             case GameState.Finished: {
-                if(Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
+                if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
                     (Game.currentGameState as any) = Game.GameState.BShoot;
                 } else (Game.currentGameState as any) = Game.GameState.YShoot;
                 break;
@@ -86,10 +86,10 @@ function clacDirTowards(pos: Vector, robot: FriendlyRobot) {
     return Math.atan2(pos.y - robot.pos.y, pos.x - robot.pos.x);
 }
 
-function vetorDistance(vec1 : Vector, vec2 : Vector) : number {
+function vetorDistance(vec1: Vector, vec2: Vector): number {
     return Math.abs(Math.pow(vec1.x - vec2.x, 2) + Math.pow(vec1.y - vec2.y, 2));
 }
 
-function vectorLength(vec : Vector) : number {
+function vectorLength(vec: Vector): number {
     return Math.abs(Math.pow(vec.x, 2) + Math.pow(vec.y, 2));
 }

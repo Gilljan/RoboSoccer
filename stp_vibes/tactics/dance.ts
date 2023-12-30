@@ -3,7 +3,7 @@ import {MoveTo} from "stp_vibes/skills/moveto";
 import {Vector} from "base/vector";
 
 
-let count : number = 0;
+let count: number = 0;
 
 enum DancePhase {
     Circle = 1000,

@@ -5,32 +5,33 @@ import * as vis from "base/vis";
 import * as plot from "base/plot";
 import * as World from "base/world";
 import * as EntryPoints from "base/entrypoints";
-import { log } from "base/amun";
-import { main as trainer } from "stp_vibes/trainerstub";
+import {log} from "base/amun";
+import {main as trainer} from "stp_vibes/trainerstub";
 
 function main(): boolean {
-	//amun.log("Main Loop")
+    //amun.log("Main Loop")
 
-	trainer()
+    trainer()
 
-	return true;
+    return true;
 }
 
 EntryPoints.add("Demo", main);
 
 function wrapper(func: () => boolean): () => void {
-	function f() {
-		World.update();
+    function f() {
+        World.update();
 
-		func();
+        func();
 
-		// Call this function to pass robot commands set during the strategy run back to amun
-		World.setRobotCommands();
-		// Clear the debug tree. Otherwise old output would pile up
-		debug.resetStack();
-		plot._plotAggregated();
-	}
-	return f;
+        // Call this function to pass robot commands set during the strategy run back to amun
+        World.setRobotCommands();
+        // Clear the debug tree. Otherwise old output would pile up
+        debug.resetStack();
+        plot._plotAggregated();
+    }
+
+    return f;
 }
 
-export let scriptInfo = { name: "Demo Strategy", entrypoints: EntryPoints.get(wrapper) }
+export let scriptInfo = {name: "Demo Strategy", entrypoints: EntryPoints.get(wrapper)}

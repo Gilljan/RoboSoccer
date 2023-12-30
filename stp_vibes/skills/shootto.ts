@@ -11,7 +11,7 @@ export class ShootTo {
     private target: Vector;
 
 
-    constructor(robot: FriendlyRobot, target : Vector) {
+    constructor(robot: FriendlyRobot, target: Vector) {
         this.robot = robot;
         this.target = target;
     }
@@ -21,7 +21,7 @@ export class ShootTo {
     // maxSpeed is a helpful parameter to adjust for e.g. in stop state where the robots are not allowed to move faster than a certain speed
     run() {
 
-        let obstacles: PathHelperParameters = { ignoreBall: false};
+        let obstacles: PathHelperParameters = {ignoreBall: false};
         //get the position of the other Player
         let otherPlayerPosition: Vector = this.target;
         //get the  poosition of the ball
@@ -44,18 +44,18 @@ export class ShootTo {
 
         let isOnShootingPosition = shootPositionOffseted.sub(this.robot.pos).length() < offset + 0.1;
 
-        if(!isOnShootingPosition || orientationDifference > orientationThreshold){
-            obstacles = { ignoreBall: false};
+        if (!isOnShootingPosition || orientationDifference > orientationThreshold) {
+            obstacles = {ignoreBall: false};
             setDefaultObstaclesByTable(this.robot.path, this.robot, obstacles);
             this.robot.trajectory.update(CurvedMaxAccel, shootPositionOffseted, shootingPositionDir);
-        }else{
-            obstacles = { ignoreBall: true};
+        } else {
+            obstacles = {ignoreBall: true};
             setDefaultObstaclesByTable(this.robot.path, this.robot, obstacles);
             this.robot.trajectory.update(CurvedMaxAccel, shootPosition, dirTowards);
 
             let reaced = this.robot.hasBall(World.Ball, 0.1);
 
-            if(reaced && Math.abs(this.robot.dir-dirTowards) < 0.1){
+            if (reaced && Math.abs(this.robot.dir - dirTowards) < 0.1) {
                 //amun.log("Shoot");
                 //this.robot.shoot(10);
                 PenaltyOffensivePrepare.currentGameState = GameState.Move;
@@ -63,14 +63,10 @@ export class ShootTo {
         }
 
 
-
         //amun.log("Robot " + this.robot.id  + " With oriantation: " + this.robot.dir +   " is passing to " + this.otherPlayer.id + " at " + otherPlayerPosition + " with the ball at " + ballPosition + ". " + "DistanceOtherBall: " + ballToOther + "ShootPosition: " + shootPositionOffseted + "on shoot position: " + isOnShootingPosition);
 
 
-
-
-
-        function clacDirTowards(pos:Vector, robot: FriendlyRobot) {
+        function clacDirTowards(pos: Vector, robot: FriendlyRobot) {
             return Math.atan2(pos.y - robot.pos.y, pos.x - robot.pos.x);
         }
 

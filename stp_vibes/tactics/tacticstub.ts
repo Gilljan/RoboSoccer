@@ -1,15 +1,15 @@
-import { FriendlyRobot } from "base/robot";
+import {FriendlyRobot} from "base/robot";
 
 export class Tacticstub {
-	private robots: FriendlyRobot[];
+    private robots: FriendlyRobot[];
 
-	constructor(robots: FriendlyRobot[]) {
-		this.robots = robots;
-	}
+    constructor(robots: FriendlyRobot[]) {
+        this.robots = robots;
+    }
 
-	public run() {
-		for (let robot of this.robots) {
-			// Run skills here
-		}
-	}
+    public run() {
+        for (let robot of this.robots) {
+            // Run skills here
+        }
+    }
 }

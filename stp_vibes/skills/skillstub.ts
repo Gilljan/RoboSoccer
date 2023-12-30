@@ -1,13 +1,14 @@
-import { FriendlyRobot } from "base/robot";
+import {FriendlyRobot} from "base/robot";
 
 export class DirectMovement {
 
-	private robot: FriendlyRobot;
-	constructor(robot: FriendlyRobot) {
-		this.robot = robot;
-	}
+    private robot: FriendlyRobot;
 
-	run() {
-		// TODO: Do your skill here
-	}
+    constructor(robot: FriendlyRobot) {
+        this.robot = robot;
+    }
+
+    run() {
+        // TODO: Do your skill here
+    }
 }
