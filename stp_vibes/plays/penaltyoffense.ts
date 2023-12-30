@@ -34,6 +34,6 @@ function generateRandomNumber(min: number, max: number, decimalPlaces: number): 
     // Begrenze die Anzahl der Dezimalstellen
     randomNumber = parseFloat(randomNumber.toFixed(decimalPlaces));
 
-amun.log(randomNumber);
+//amun.log(randomNumber);
     return randomNumber;
 }

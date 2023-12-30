@@ -15,16 +15,18 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
         GameState[GameState["Dance"] = 7] = "Dance";
     })(GameState = exports.GameState || (exports.GameState = {}));
     exports.locked = false;
-    exports.currentGameState = GameState.Dance;
+    exports.currentGameState = GameState.BPrep;
     class Game {
         constructor() {
         }
         run() {
+            if (!World.TeamIsBlue) {
+                amun.log("GS: " + exports.currentGameState);
+            }
             switch (exports.currentGameState) {
                 case GameState.BPrep: {
                     exports.locked = true;
                     if (World.TeamIsBlue) {
-                        PenaltyOffensivePrepare.currentGameState = PenaltyOffensivePrepare.GameState.GetBall;
                         new PenaltyOffensivePrepare.PenaltyOffensivePrepare().run();
                     }
                     else {
@@ -38,7 +40,6 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
                         new penaltydefenseprepare_1.PenaltyDefensePrepare().run();
                     }
                     else {
-                        PenaltyOffensivePrepare.currentGameState = PenaltyOffensivePrepare.GameState.GetBall;
                         new PenaltyOffensivePrepare.PenaltyOffensivePrepare().run();
                     }
                     break;

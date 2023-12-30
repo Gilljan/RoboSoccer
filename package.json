@@ -4,6 +4,7 @@
     "lint-fix": "eslint --ext .js,.ts --fix ."
   },
   "devDependencies": {
+    "@types/node": "^20.10.6",
     "@typescript-eslint/eslint-plugin": "5.26.0",
     "@typescript-eslint/parser": "5.26.0",
     "eslint": "^8.29.0",

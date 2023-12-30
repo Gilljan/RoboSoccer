@@ -1,8 +1,8 @@
-define(["require", "exports", "base/world", "stp_vibes/plays/game", "stp_vibes/plays/halt", "stp_vibes/plays/game"], function (require, exports, World, game_1, halt_1, game_2) {
+define(["require", "exports", "base/world", "stp_vibes/plays/game", "stp_vibes/plays/halt"], function (require, exports, World, game_1, halt_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.main = void 0;
-    let currentPlay = new game_1.Game(game_2.GameState.NULL);
+    let currentPlay = new game_1.Game();
     function redecide_play() {
         return true;
     }

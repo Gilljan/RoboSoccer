@@ -14,7 +14,6 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
         constructor() {
         }
         run() {
-            amun.log(exports.currentGameState);
             switch (exports.currentGameState) {
                 case GameState.GetBall: {
                     const robot = World.FriendlyRobotsById[1];
@@ -41,6 +40,7 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                         }
                         else
                             Game.currentGameState = Game.GameState.YShoot;
+                        exports.currentGameState = GameState.GetBall;
                     }
                     else
                         new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 2.0), robot.dir);

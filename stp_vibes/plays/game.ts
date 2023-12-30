@@ -22,7 +22,8 @@ export enum GameState {
 }
 
 export let locked: boolean = false;
-export let currentGameState: GameState = GameState.Dance;
+export let currentGameState: GameState = GameState.BPrep;
+
 
 export class Game {
 
@@ -33,6 +34,10 @@ export class Game {
 
     run() {
         //dance.run();
+        if(!World.TeamIsBlue) {
+        
+        amun.log("GS: " + currentGameState);
+        }
         switch (currentGameState) {
             case GameState.BPrep: {
                 //amun.log("executed");

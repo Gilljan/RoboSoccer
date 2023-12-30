@@ -19,7 +19,6 @@ define(["require", "exports", "base/world", "stp_vibes/skills/shootto", "base/ve
         const range = max - min;
         let randomNumber = Math.random() * range + min;
         randomNumber = parseFloat(randomNumber.toFixed(decimalPlaces));
-        amun.log(randomNumber);
         return randomNumber;
     }
 });

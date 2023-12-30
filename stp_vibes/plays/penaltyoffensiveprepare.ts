@@ -28,7 +28,6 @@ export class PenaltyOffensivePrepare {
             case GameState.GetBall: {
                 const robot = World.FriendlyRobotsById[1];
                 //const robotBall = World.FriendlyRobotsById[2];
-amun.log("GETTTTT");
 
                 let dirTowards = clacDirTowards(World.Ball.pos, robot);
 
@@ -71,7 +70,7 @@ amun.log("GETTTTT");
                         (Game.currentGameState as any) = Game.GameState.BShoot;
                     } else (Game.currentGameState as any) = Game.GameState.YShoot;
                     currentGameState = GameState.GetBall;
-                    amun.log(currentGameState);
+                    //amun.log(currentGameState);
                 } else new MoveTo(robot).run(new Vector(0.0, 2.0), robot.dir) ;
                 
                 break;
