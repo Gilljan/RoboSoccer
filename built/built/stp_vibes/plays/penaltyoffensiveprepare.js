@@ -16,13 +16,13 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
         run() {
             switch (exports.currentGameState) {
                 case GameState.GetBall: {
-                    const robot = World.FriendlyRobotsById[1];
+                    const robot = World.FriendlyRobotsById[(Game.counter % 4) + 1];
                     let dirTowards = clacDirTowards(World.Ball.pos, robot);
                     new shootto_1.ShootTo(robot, new vector_1.Vector(0.0, 3.95), true).run();
                     break;
                 }
                 case GameState.Move: {
-                    const robot = World.FriendlyRobotsById[1];
+                    const robot = World.FriendlyRobotsById[(Game.counter % 4) + 1];
                     robot.setDribblerSpeed(1);
                     new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 3.85), robot.dir, undefined, undefined, { ignoreDefenseArea: true, ignoreBall: true });
                     const vector = robot.pos;
@@ -38,7 +38,7 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                 }
                 case GameState.Finished: {
                     const neededPos = new vector_1.Vector(0.0, 3.85);
-                    const robot = World.FriendlyRobotsById[1];
+                    const robot = World.FriendlyRobotsById[(Game.counter % 4) + 1];
                     if (vetorDistance(robot.pos, new vector_1.Vector(0.0, 2.0)) < 0.025) {
                         if (vetorDistance(neededPos, World.Ball.pos) > 0.5) {
                             exports.currentGameState = GameState.GetBall;

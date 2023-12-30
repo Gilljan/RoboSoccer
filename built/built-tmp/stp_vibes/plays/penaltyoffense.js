@@ -1,4 +1,4 @@
-define(["require", "exports", "base/world", "stp_vibes/skills/shootto", "base/vector"], function (require, exports, World, shootto_1, vector_1) {
+define(["require", "exports", "base/world", "stp_vibes/skills/shootto", "stp_vibes/plays/game", "base/vector"], function (require, exports, World, shootto_1, Game, vector_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.PenaltyOffense = void 0;
@@ -7,7 +7,7 @@ define(["require", "exports", "base/world", "stp_vibes/skills/shootto", "base/ve
         constructor() {
         }
         run() {
-            const robot = World.FriendlyRobotsById[1];
+            const robot = World.FriendlyRobotsById[(Game.counter % 4) + 1];
             new shootto_1.ShootTo(robot, new vector_1.Vector(random, 6.1), false).run();
         }
     }

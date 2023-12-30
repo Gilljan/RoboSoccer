@@ -25,9 +25,9 @@ export class PenaltyEnd {
                 } else (Game.currentGameState as any) = Game.GameState.BPrep;
             }
         } else {
-            const opponentRobot = World.OpponentRobotsById[1];
+            const opponentRobot = World.OpponentRobotsById[(Game.counter % 4)+1];
 
-            if(vectorDistance(opponentRobot.pos, new Vector(3.0, 0.0 + index)) < 0.1) {
+            if(vectorDistance(opponentRobot.pos, new Vector(-3.0, - index)) < 0.1) {
                 if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;
                 } else {(Game.currentGameState as any) = Game.GameState.BPrep;}
