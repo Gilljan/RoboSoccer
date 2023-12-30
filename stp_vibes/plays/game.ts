@@ -7,7 +7,7 @@ import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
 import {PenaltyOffensivePrepare} from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyOffense} from "stp_vibes/plays/penaltyoffense";
 import {PenaltyEnd} from "stp_vibes/plays/penaltyend";
-import {PenaltyDefense} from "./penaltydefense";
+import {PenaltyDefense} from "stp_vibes/plays/penaltydefense";
 
 let dance: Dance;
 

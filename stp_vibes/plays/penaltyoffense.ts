@@ -4,6 +4,7 @@ import * as Game from "stp_vibes/plays/game";
 import {Vector} from "base/vector";
 import {FriendlyRobot} from "base/robot";
 
+let random: number = generateRandomNumber(-1.1, 1.1, 4);
 
 export class PenaltyOffense {
 
@@ -13,9 +14,7 @@ export class PenaltyOffense {
     run() {
         const robot = World.FriendlyRobotsById[1];
 
-        const random = generateRandomNumber(-1.1, 1.1, 4);
-
-        new ShootTo(robot, new Vector(-1.0, 6.1), false).run();
+        new ShootTo(robot, new Vector(random, 6.1), false).run();
     }
 }
 
@@ -37,3 +36,4 @@ function generateRandomNumber(min: number, max: number, decimalPlaces: number): 
 //amun.log(randomNumber);
     return randomNumber;
 }
+

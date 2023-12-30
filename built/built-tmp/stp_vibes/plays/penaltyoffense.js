@@ -2,13 +2,13 @@ define(["require", "exports", "base/world", "stp_vibes/skills/shootto", "base/ve
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.PenaltyOffense = void 0;
+    let random = generateRandomNumber(-1.1, 1.1, 4);
     class PenaltyOffense {
         constructor() {
         }
         run() {
             const robot = World.FriendlyRobotsById[1];
-            const random = generateRandomNumber(-1.1, 1.1, 4);
-            new shootto_1.ShootTo(robot, new vector_1.Vector(-1.0, 6.1), false).run();
+            new shootto_1.ShootTo(robot, new vector_1.Vector(random, 6.1), false).run();
         }
     }
     exports.PenaltyOffense = PenaltyOffense;
