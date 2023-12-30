@@ -18,7 +18,7 @@ export class PenaltyOffense {
     }
 
     run() {
-        const robot = World.FriendlyRobotsById[(Game.counter % 4)+1];
+        const robot = World.FriendlyRobotsById[(Game.shoots % 4)+1];
 
         new ShootTo(robot, new Vector(random, 6.1), false).run();
     }

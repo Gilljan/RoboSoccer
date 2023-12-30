@@ -24,7 +24,7 @@ export class PenaltyOffensivePrepare {
     run() {
         switch (currentGameState) {
             case GameState.GetBall: {
-                const robot = World.FriendlyRobotsById[(Game.counter % 4)+1];
+                const robot = World.FriendlyRobotsById[(Game.shoots % 4)+1];
                 //const robotBall = World.FriendlyRobotsById[2];
 
                 let dirTowards = clacDirTowards(World.Ball.pos, robot);
@@ -37,7 +37,7 @@ export class PenaltyOffensivePrepare {
                 break;
             }
             case GameState.Move: {
-                const robot = World.FriendlyRobotsById[(Game.counter % 4)+1];
+                const robot = World.FriendlyRobotsById[(Game.shoots % 4)+1];
 
                 robot.setDribblerSpeed(1);
 
@@ -66,7 +66,7 @@ export class PenaltyOffensivePrepare {
             case GameState.Finished: {
                 const neededPos: Vector = new Vector(0.0, 3.85);
            
-                const robot = World.FriendlyRobotsById[(Game.counter % 4)+1];
+                const robot = World.FriendlyRobotsById[(Game.shoots % 4)+1];
                 if(vetorDistance(robot.pos, new Vector(0.0, 2.0)) < 0.025) {
                 if(vetorDistance(neededPos, World.Ball.pos) > 0.5) {
                 currentGameState = GameState.GetBall;
@@ -86,7 +86,7 @@ export class PenaltyOffensivePrepare {
 
         }/*
 	 amun.log("Ball:" + World.Ball.pos);
-		const robot = World.FriendlyRobotsById[(Game.counter % 4)+1];
+		const robot = World.FriendlyRobotsById[(Game.shoots % 4)+1];
 		const robotBall = World.FriendlyRobotsById[2];
 		amun.log(World.FriendlyRobots);
 		new MoveTo(robot).run(new Vector(0.0, 4.0), 0);

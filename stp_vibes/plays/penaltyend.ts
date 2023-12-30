@@ -12,9 +12,9 @@ export class PenaltyEnd {
     }
 
     run(defense: boolean) {
-        const robot = defense ? World.FriendlyRobotsById[0] : World.FriendlyRobotsById[(Game.counter % 4)+1];
+        const robot = defense ? World.FriendlyRobotsById[0] : World.FriendlyRobotsById[(Game.shoots % 4)+1];
 
-        var index = (Game.counter % 4)+1;
+        var index = (Game.shoots % 4)+1;
 
         new MoveTo(robot).run(defense ? new Vector(0, -6) : new Vector(3.0, 0.0 + index), robot.dir);
 
