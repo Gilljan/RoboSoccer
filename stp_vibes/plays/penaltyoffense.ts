@@ -4,11 +4,17 @@ import * as Game from "stp_vibes/plays/game";
 import {Vector} from "base/vector";
 import {FriendlyRobot} from "base/robot";
 
+let count: number = 0;
 let random: number = generateRandomNumber(-1.1, 1.1, 4);
 
 export class PenaltyOffense {
 
     constructor() {
+        if (Game.shoots > count) {
+            count++;
+
+            random = generateRandomNumber(-1.1, 1.1, 4);
+        }
     }
 
     run() {
