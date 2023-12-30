@@ -35,6 +35,7 @@ export class Game {
 
     run() {
         //dance.run();
+       // amun.log(shoots);
         if (shoots >= 10) {
             counter++;
             if(counter == 300){
