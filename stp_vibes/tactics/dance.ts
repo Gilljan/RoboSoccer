@@ -120,7 +120,7 @@ export class Dance {
 
     calcRotatedPos(index: number, reverse: boolean, radius: (index: number) => number): Vector {
         // Calculate the position in a circle around the center
-        const angle = ((index + (reverse ? -count : count) / 400) / this.robots.length) * 2 * Math.PI;
+        const angle = ((index + (reverse ? -count : count) / 400) / (this.robots.length - 1)) * 2 * Math.PI;
 
         const x = centerX + radius(index) * Math.cos(angle);
         const y = centerY + radius(index) * Math.sin(angle);
