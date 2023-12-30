@@ -7,6 +7,7 @@ import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
 import {PenaltyOffensivePrepare} from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyOffense} from "stp_vibes/plays/penaltyoffense";
 import {PenaltyEnd} from "stp_vibes/plays/penaltyend";
+import {PenaltyDefense} from "./penaltydefense";
 
 let dance: Dance;
 
@@ -34,9 +35,9 @@ export class Game {
 
     run() {
         //dance.run();
-        if(!World.TeamIsBlue) {
-        
-        amun.log("GS: " + currentGameState);
+        if (!World.TeamIsBlue) {
+
+            amun.log("GS: " + currentGameState);
         }
         switch (currentGameState) {
             case GameState.BPrep: {
@@ -66,19 +67,19 @@ export class Game {
             }
             case GameState.BShoot: {
                 //amun.log("BSHOOT");
-                
+
                 if (World.TeamIsBlue) {
-                new PenaltyOffense().run();
+                    new PenaltyOffense().run();
                 } else {
-                    //new PenaltyOffensivePrepare().run();
+                    new PenaltyDefense().run();
                 }
                 break;
             }
             case GameState.YShoot: {
-            if (!World.TeamIsBlue) {
-                new PenaltyOffense().run();
+                if (!World.TeamIsBlue) {
+                    new PenaltyOffense().run();
                 } else {
-                    //new PenaltyOffensivePrepare().run();
+                    new PenaltyDefense().run();
                 }
                 break;
             }
