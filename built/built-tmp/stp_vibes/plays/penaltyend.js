@@ -6,10 +6,11 @@ define(["require", "exports", "base/world", "stp_vibes/plays/game", "base/vector
         constructor() {
         }
         run(defense) {
-            const robot = defense ? World.FriendlyRobotsById[0] : World.FriendlyRobotsById[(Game.counter % 4) + 1];
-            var index = (Game.counter % 4) + 1;
+            var index = (Game.shoots % 5) == 0 ? 5 : (Game.shoots % 5);
+            const robot = defense ? World.FriendlyRobotsById[0] : World.FriendlyRobotsById[index];
             new moveto_1.MoveTo(robot).run(defense ? new vector_1.Vector(0, -6) : new vector_1.Vector(3.0, 0.0 + index), robot.dir);
             if (!defense) {
+                amun.log("1 : " + vectorDistance(robot.pos, new vector_1.Vector(3.0, 0.0 + index)));
                 if (vectorDistance(robot.pos, new vector_1.Vector(3.0, 0.0 + index)) < 0.1) {
                     if (Game.currentGameState == Game.GameState.BEnd) {
                         Game.currentGameState = Game.GameState.YPrep;
@@ -19,7 +20,8 @@ define(["require", "exports", "base/world", "stp_vibes/plays/game", "base/vector
                 }
             }
             else {
-                const opponentRobot = World.OpponentRobotsById[(Game.counter % 4) + 1];
+                const opponentRobot = World.OpponentRobotsById[index];
+                amun.log("2: " + vectorDistance(opponentRobot.pos, new vector_1.Vector(-3.0, -index)));
                 if (vectorDistance(opponentRobot.pos, new vector_1.Vector(-3.0, -index)) < 0.1) {
                     if (Game.currentGameState == Game.GameState.BEnd) {
                         Game.currentGameState = Game.GameState.YPrep;

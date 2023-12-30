@@ -9,21 +9,23 @@ export class PenaltyEnd {
     }
 
     run(defense: boolean) {
-        const robot = defense ? World.FriendlyRobotsById[0] : World.FriendlyRobotsById[(Game.shoots % 4)+1];
+        var index = (Game.shoots % 5) == 0 ? 5 : (Game.shoots % 5);
+        const robot = defense ? World.FriendlyRobotsById[0] : World.FriendlyRobotsById[index];
 
-        var index = (Game.shoots % 4)+1;
+        
 
         new MoveTo(robot).run(defense ? new Vector(0, -6) : new Vector(3.0, 0.0 + index), robot.dir);
 
         if(!defense) {
+        amun.log("1 : " + vectorDistance(robot.pos, new Vector(3.0, 0.0 + index)));
             if(vectorDistance(robot.pos, new Vector(3.0, 0.0 + index)) < 0.1) {
                 if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;
                 } else (Game.currentGameState as any) = Game.GameState.BPrep;
             }
         } else {
-            const opponentRobot = World.OpponentRobotsById[(Game.counter % 4)+1];
-
+            const opponentRobot = World.OpponentRobotsById[index];
+amun.log("2: " + vectorDistance(opponentRobot.pos, new Vector(-3.0, - index)));
             if(vectorDistance(opponentRobot.pos, new Vector(-3.0, - index)) < 0.1) {
                 if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;
