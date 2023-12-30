@@ -17,7 +17,7 @@ export class PenaltyEnd {
         new MoveTo(robot).run(defense ? new Vector(0, -6) : new Vector(3.0, 0.0 + index), robot.dir);
 
         if(!defense) {
-        amun.log("1 : " + vectorDistance(robot.pos, new Vector(3.0, 0.0 + index)));
+        //amun.log("1 : " + vectorDistance(robot.pos, new Vector(3.0, 0.0 + index)));
             if(vectorDistance(robot.pos, new Vector(3.0, 0.0 + index)) < 0.1) {
                 if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;
@@ -25,7 +25,7 @@ export class PenaltyEnd {
             }
         } else {
             const opponentRobot = World.OpponentRobotsById[index];
-amun.log("2: " + vectorDistance(opponentRobot.pos, new Vector(-3.0, - index)));
+//amun.log("2: " + vectorDistance(opponentRobot.pos, new Vector(-3.0, - index)));
             if(vectorDistance(opponentRobot.pos, new Vector(-3.0, - index)) < 0.1) {
                 if(Game.currentGameState == Game.GameState.BEnd) {
                     (Game.currentGameState as any) = Game.GameState.YPrep;

@@ -42,7 +42,7 @@ export class Game {
             }
             //amun.log("GS: " + currentGameState);
         }
-        amun.log("GS: " + currentGameState);
+        //amun.log("GS: " + currentGameState);
         switch (currentGameState) {
             case GameState.NULL: {
                 new StartFormation().run();

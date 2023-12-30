@@ -68,7 +68,7 @@ export class ShootTo {
                     (Game.currentGameState as any) = Game.GameState.BEnd;
                 } else (Game.currentGameState as any) = Game.GameState.YEnd;
                 Game.shoots = Game.shoots + 1;
-                amun.log(Game.shoots);
+                //amun.log(Game.shoots);
             }
         }
 
