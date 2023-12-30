@@ -20,7 +20,6 @@ export enum GameState {
     Dance
 }
 
-export let locked: boolean = false;
 export let currentGameState: GameState = GameState.NULL;
 export let shoots: number = 0;//has to be 10 in the end
 export let counter: number = 0;
@@ -50,7 +49,6 @@ export class Game {
             }
             case GameState.BPrep: {
                 //amun.log("executed");
-                locked = true;
 
                 if (World.TeamIsBlue) {
                     //(PenaltyOffensivePrepare.currentGameState as any) = PenaltyOffensivePrepare.GameState.GetBall;
@@ -61,8 +59,6 @@ export class Game {
                 break;
             }
             case GameState.YPrep: {
-                locked = true;
-
                 if (World.TeamIsBlue) {
                     new PenaltyDefensePrepare().run();
                 } else {

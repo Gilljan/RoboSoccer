@@ -1,6 +1,7 @@
 import {FriendlyRobot} from "../../base/robot";
 import {MoveTo} from "stp_vibes/skills/moveto";
 import {Vector} from "base/vector";
+import * as Game from "stp_vibes/plays/game";
 
 let centerX: number = 0;
 let centerY: number = 0;
@@ -103,12 +104,16 @@ export class Dance {
             amun.log(currentPhase);
 
             count = 0;
+            
+            if (currentPhase == 0) {
+              (Game.currentGameState as any) = Game.GameState.Null;
+            }
         }
     }
 
     moveKeeper(robot: FriendlyRobot, index: number): boolean {
         if (index == 0) {
-            new MoveTo(robot).run(new Vector(0.0, 4.0), 0);
+            new MoveTo(robot).run(new Vector(0.0, -6.0), 0);
 
             return true;
         }

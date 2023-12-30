@@ -26,7 +26,6 @@ define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vec
             }
             play.run(new vector_1.Vector(targetX, robot.pos.y), 0);
             count++;
-            amun.log(World.Ball.speed);
             if (World.Ball.pos.y < -5.6) {
                 amun.log("#1");
                 if (Game.currentGameState == Game.GameState.BShoot) {

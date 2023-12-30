@@ -38,7 +38,7 @@ export class PenaltyDefense {
 
         count++;
 
-	amun.log(World.Ball.speed);
+	//amun.log(World.Ball.speed);
         if (World.Ball.pos.y < -5.6) {
             amun.log("#1");
             if (Game.currentGameState == Game.GameState.BShoot) {

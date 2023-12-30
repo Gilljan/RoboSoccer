@@ -1,4 +1,4 @@
-define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], function (require, exports, moveto_1, vector_1) {
+define(["require", "exports", "stp_vibes/skills/moveto", "base/vector", "stp_vibes/plays/game"], function (require, exports, moveto_1, vector_1, Game) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Dance = void 0;
@@ -73,11 +73,14 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
                 currentPhase = Object.keys(DancePhase)[(currentPhase + 1) % 4] | undefined;
                 amun.log(currentPhase);
                 count = 0;
+                if (currentPhase == 0) {
+                    Game.currentGameState = Game.GameState.Null;
+                }
             }
         }
         moveKeeper(robot, index) {
             if (index == 0) {
-                new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 4.0), 0);
+                new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, -6.0), 0);
                 return true;
             }
             return false;
