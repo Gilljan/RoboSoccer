@@ -41,6 +41,14 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
                     }
                     break;
                 }
+                case GameState.BShoot: {
+                    amun.log("BSHOOT");
+                    break;
+                }
+                case GameState.YShoot: {
+                    amun.log("YSHOOT");
+                    break;
+                }
                 case GameState.Dance: {
                     new dance_1.Dance(World.FriendlyRobots).run();
                 }

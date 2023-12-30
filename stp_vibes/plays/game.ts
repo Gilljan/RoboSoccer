@@ -25,7 +25,6 @@ export class Game {
 		currentGameState = startWith;
 	 //dance = new Dance(World.FriendlyRobots);
 	}
-
 	run() {
     		//dance.run();
     		switch(currentGameState) {
@@ -48,6 +47,14 @@ export class Game {
     				break;	
     			
     			}
+    			case GameState.BShoot: {
+					amun.log("BSHOOT");
+					break;
+				}
+				case GameState.YShoot: {
+					amun.log("YSHOOT");
+					break;
+				}
     			case GameState.Dance: {
     				new Dance(World.FriendlyRobots).run();
     			}

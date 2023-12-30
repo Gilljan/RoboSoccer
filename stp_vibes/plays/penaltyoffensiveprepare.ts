@@ -5,11 +5,13 @@ import {PathHelperParameters} from "base/trajectory/pathhelper";
 import {FriendlyRobot} from "base/robot";
 import {Passto} from "stp_vibes/skills/passto";
 import {ShootTo} from "stp_vibes/skills/shootto";
+import * as Game from "stp_vibes/plays/game";
 
 
 export enum GameState {
     GetBall,
-    Move
+    Move,
+    Finished
 }
 
 export let locked: boolean = false;
@@ -44,6 +46,23 @@ export class PenaltyOffensivePrepare {
                 robot.setDribblerSpeed(1);
 
                 new MoveTo(robot).run(new Vector(0.0, 4.0), robot.dir);
+                amun.log(robot.speed);
+                
+                const vector : Vector = robot.pos;
+                const neededPos : Vector =  new Vector(0.0, 4.0);
+                
+                if(vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
+                    amun.log("Moving finished => shooting phase")
+                    
+                    if(Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == GameState.BShoot) {
+                        (Game.currentGameState as any) = Game.GameState.BShoot;
+                    } else (Game.currentGameState as any) = Game.GameState.YShoot;
+                    
+                    amun.log(Game.currentGameState);
+                    
+                    currentGameState = GameState.Finished;
+                }
+                
 
                 break;
             }
@@ -64,3 +83,10 @@ function clacDirTowards(pos: Vector, robot: FriendlyRobot) {
     return Math.atan2(pos.y - robot.pos.y, pos.x - robot.pos.x);
 }
 
+function vetorDistance(vec1 : Vector, vec2 : Vector) : number {
+    return Math.abs(Math.pow(vec1.x - vec2.x, 2) + Math.pow(vec1.y - vec2.y, 2));
+}
+
+function vectorLength(vec : Vector) : number {
+    return Math.abs(Math.pow(vec.x, 2) + Math.pow(vec.y, 2));
+}
