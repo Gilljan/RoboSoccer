@@ -83,7 +83,7 @@ define(["require", "exports", "stp_vibes/skills/moveto", "base/vector"], functio
             return false;
         }
         calcRotatedPos(index, reverse, radius) {
-            const angle = ((index + (reverse ? -count : count) / 400) / this.robots.length) * 2 * Math.PI;
+            const angle = ((index + (reverse ? -count : count) / 400) / (this.robots.length - 1)) * 2 * Math.PI;
             const x = centerX + radius(index) * Math.cos(angle);
             const y = centerY + radius(index) * Math.sin(angle);
             return new vector_1.Vector(x, y);

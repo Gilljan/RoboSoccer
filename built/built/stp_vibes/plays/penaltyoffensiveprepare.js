@@ -24,7 +24,7 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                 case GameState.Move: {
                     const robot = World.FriendlyRobotsById[1];
                     robot.setDribblerSpeed(1);
-                    new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 3.85), robot.dir);
+                    new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 3.85), robot.dir, undefined, undefined, { ignoreDefenseArea: true, ignoreBall: true });
                     const vector = robot.pos;
                     const neededPos = new vector_1.Vector(0.0, 3.85);
                     if (vetorDistance(vector, neededPos) < 0.025 && vectorLength(robot.speed) <= 0.05) {
@@ -52,7 +52,7 @@ define(["require", "exports", "base/world", "base/vector", "stp_vibes/skills/mov
                         exports.currentGameState = GameState.GetBall;
                     }
                     else
-                        new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 2.0), robot.dir, 1.0);
+                        new moveto_1.MoveTo(robot).run(new vector_1.Vector(0.0, 2.0), robot.dir, 1.0, undefined, { ignoreDefenseArea: true, ignoreBall: true });
                     break;
                 }
             }

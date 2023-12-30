@@ -9,7 +9,7 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
             this.prep = prep;
         }
         run() {
-            let obstacles = { ignoreBall: false };
+            let obstacles;
             let otherPlayerPosition = this.target;
             let ballPosition = World.Ball.pos;
             let offset = 0.6;
@@ -22,12 +22,12 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
             let orientationThreshold = 10 * (Math.PI / 180);
             let isOnShootingPosition = shootPositionOffseted.sub(this.robot.pos).length() < offset + 0.1;
             if (!isOnShootingPosition || orientationDifference > orientationThreshold) {
-                obstacles = { ignoreBall: false };
+                obstacles = { ignoreBall: false, ignorePenaltyDistance: true, ignoreDefenseArea: true };
                 (0, pathhelper_1.setDefaultObstaclesByTable)(this.robot.path, this.robot, obstacles);
                 this.robot.trajectory.update(curvedmaxaccel_1.CurvedMaxAccel, shootPositionOffseted, shootingPositionDir);
             }
             else {
-                obstacles = { ignoreBall: true };
+                obstacles = { ignoreBall: true, ignorePenaltyDistance: true, ignoreDefenseArea: true };
                 (0, pathhelper_1.setDefaultObstaclesByTable)(this.robot.path, this.robot, obstacles);
                 this.robot.trajectory.update(curvedmaxaccel_1.CurvedMaxAccel, shootPosition, dirTowards);
                 let reaced = this.robot.hasBall(World.Ball, 0.1);
