@@ -43,7 +43,7 @@ export class PenaltyDefense {
         count++;
 
 	//amun.log(World.Ball.speed);
-        if (vectorDistance(World.Ball.pos, new Vector(0.0, 3.85)) > 1.5 && World.Ball.speed.equals(new Vector(0, 0))) {
+        if (vectorDistance(World.Ball.pos, new Vector(0.0, 3.85)) > 3.5 && World.Ball.speed.equals(new Vector(0, 0))) {
             amun.log("#1");
             if (Game.currentGameState == Game.GameState.BShoot) {
                 (Game.currentGameState as any) = Game.GameState.BEnd;
