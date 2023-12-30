@@ -67,12 +67,12 @@ export class PenaltyOffensivePrepare {
             case GameState.Finished: {
             
                 const robot = World.FriendlyRobotsById[1];
-            if(vetorDistance(robot.pos, new Vector(0.0, 2.0)) < 0.025) {
-		    
+                if(vetorDistance(robot.pos, new Vector(0.0, 2.0)) < 0.025) {
                     if (Game.currentGameState == Game.GameState.BPrep || Game.currentGameState == Game.GameState.BShoot) {
-                    (Game.currentGameState as any) = Game.GameState.BShoot;
-                } else (Game.currentGameState as any) = Game.GameState.YShoot;
-                    } else new MoveTo(robot).run(new Vector(0.0, 2.0), robot.dir) ;
+                        (Game.currentGameState as any) = Game.GameState.BShoot;
+                    } else (Game.currentGameState as any) = Game.GameState.YShoot;
+                    currentGameState = GameState.GetBall;
+                } else new MoveTo(robot).run(new Vector(0.0, 2.0), robot.dir) ;
                 
                 break;
             }

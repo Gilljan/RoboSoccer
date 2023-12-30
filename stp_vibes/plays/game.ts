@@ -39,7 +39,7 @@ export class Game {
                 locked = true;
 
                 if (World.TeamIsBlue) {
-                    (PenaltyOffensivePrepare.currentGameState as any) = PenaltyOffensivePrepare.GameState.GetBall;
+                    //(PenaltyOffensivePrepare.currentGameState as any) = PenaltyOffensivePrepare.GameState.GetBall;
                     new PenaltyOffensivePrepare.PenaltyOffensivePrepare().run();
                 } else {
                     new PenaltyDefensePrepare().run();
@@ -52,7 +52,7 @@ export class Game {
                 if (World.TeamIsBlue) {
                     new PenaltyDefensePrepare().run();
                 } else {
-                    (PenaltyOffensivePrepare.currentGameState as any) = PenaltyOffensivePrepare.GameState.GetBall;
+                    //(PenaltyOffensivePrepare.currentGameState as any) = PenaltyOffensivePrepare.GameState.GetBall;
                     new PenaltyOffensivePrepare.PenaltyOffensivePrepare().run();
                 }
 
