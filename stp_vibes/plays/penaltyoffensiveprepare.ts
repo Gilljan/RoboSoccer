@@ -1,9 +1,7 @@
 import * as World from "base/world";
 import {Vector} from "base/vector";
 import {MoveTo} from "stp_vibes/skills/moveto";
-import {PathHelperParameters} from "base/trajectory/pathhelper";
 import {FriendlyRobot} from "base/robot";
-import {Passto} from "stp_vibes/skills/passto";
 import {ShootTo} from "stp_vibes/skills/shootto";
 import * as Game from "stp_vibes/plays/game";
 
