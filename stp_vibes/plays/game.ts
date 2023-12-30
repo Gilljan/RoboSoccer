@@ -5,6 +5,7 @@ import {Dance} from "stp_vibes/tactics/dance";
 import {PenaltyOffensivePrepare} from "stp_vibes/plays/penaltyoffensiveprepare";
 import {PenaltyDefensePrepare} from "stp_vibes/plays/penaltydefenseprepare";
 import {PenaltyOffense} from "stp_vibes/plays/penaltyoffense";
+import {PenaltyEnd} from "./penaltyend";
 
 let dance: Dance;
 
@@ -67,6 +68,14 @@ export class Game {
             }
             case GameState.YShoot: {
                 amun.log("YSHOOT");
+                break;
+            }
+            case GameState.BEnd: {
+                new PenaltyEnd().run(!World.TeamIsBlue);
+                break;
+            }
+            case GameState.YEnd: {
+                new PenaltyEnd().run(World.TeamIsBlue);
                 break;
             }
             case GameState.Dance: {
