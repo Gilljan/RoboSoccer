@@ -9,7 +9,7 @@ define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vec
         run() {
             World.FriendlyRobots.forEach((value, index, array) => {
                 const skill = new moveto_1.MoveTo(value);
-                skill.run(new vector_1.Vector(3.0, 0.0 + index), 0);
+                skill.run(new vector_1.Vector(3.0, index), 0);
             });
             count++;
             if (count >= 500) {

@@ -17,7 +17,7 @@ define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vec
             if (count % 50 == 0) {
                 const min = 0;
                 const max = 10;
-                if (vectorDistance(robot.pos, World.Ball.pos) < 3.0) {
+                if (vectorDistance(robot.pos, World.Ball.pos) < 2.5) {
                     targetX = World.Ball.pos.x;
                 }
                 else {
@@ -26,7 +26,9 @@ define(["require", "exports", "base/world", "stp_vibes/skills/moveto", "base/vec
             }
             play.run(new vector_1.Vector(targetX, robot.pos.y), 0);
             count++;
-            if (started && World.Ball.speed.equals(new vector_1.Vector(0, 0))) {
+            amun.log(World.Ball.speed);
+            if (World.Ball.pos.y < -5.6) {
+                amun.log("#1");
                 if (Game.currentGameState == Game.GameState.BShoot) {
                     Game.currentGameState = Game.GameState.BEnd;
                 }

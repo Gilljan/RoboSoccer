@@ -2,6 +2,8 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ShootTo = void 0;
+    let offset = 0.6;
+    let orientationThreshold = 10 * (Math.PI / 180);
     class ShootTo {
         constructor(robot, target, prep) {
             this.robot = robot;
@@ -10,47 +12,41 @@ define(["require", "exports", "base/trajectory/curvedmaxaccel", "base/trajectory
         }
         run() {
             let obstacles;
-            let otherPlayerPosition = this.target;
-            let ballPosition = World.Ball.pos;
-            let offset = 0.6;
-            let ballToOther = otherPlayerPosition.sub(ballPosition).normalized();
-            let shootPositionOffseted = ballPosition.add(ballToOther.mul(-offset));
-            let shootPosition = ballPosition.add(ballToOther.mul(-0.04));
-            let dirTowards = clacDirTowards(ballPosition, this.robot);
-            let shootingPositionDir = clacDirTowards(shootPosition, this.robot);
+            let ballPos = World.Ball.pos;
+            let ballToOther = this.target.sub(ballPos).normalized();
+            let shootPositionOffseted = ballPos.add(ballToOther.mul(-offset));
+            let shootPosition = ballPos.add(ballToOther.mul(-0.04));
+            let dirTowards = calcDirTowards(ballPos, this.robot);
+            let shootingPositionDir = calcDirTowards(shootPosition, this.robot);
             let orientationDifference = Math.abs(this.robot.dir - dirTowards);
-            let orientationThreshold = 10 * (Math.PI / 180);
             let isOnShootingPosition = shootPositionOffseted.sub(this.robot.pos).length() < offset + 0.1;
             if (!isOnShootingPosition || orientationDifference > orientationThreshold) {
                 obstacles = { ignoreBall: false, ignorePenaltyDistance: true, ignoreDefenseArea: true };
                 (0, pathhelper_1.setDefaultObstaclesByTable)(this.robot.path, this.robot, obstacles);
                 this.robot.trajectory.update(curvedmaxaccel_1.CurvedMaxAccel, shootPositionOffseted, shootingPositionDir);
+                return;
             }
-            else {
-                obstacles = { ignoreBall: true, ignorePenaltyDistance: true, ignoreDefenseArea: true };
-                (0, pathhelper_1.setDefaultObstaclesByTable)(this.robot.path, this.robot, obstacles);
-                this.robot.trajectory.update(curvedmaxaccel_1.CurvedMaxAccel, shootPosition, dirTowards);
-                let reaced = this.robot.hasBall(World.Ball, 0.1);
-                if (reaced && Math.abs(this.robot.dir - dirTowards) < 0.1) {
-                    if (this.prep) {
-                        PenaltyOffensivePrepare.currentGameState = penaltyoffensiveprepare_1.GameState.Move;
+            obstacles = { ignoreBall: true, ignorePenaltyDistance: true, ignoreDefenseArea: true };
+            (0, pathhelper_1.setDefaultObstaclesByTable)(this.robot.path, this.robot, obstacles);
+            this.robot.trajectory.update(curvedmaxaccel_1.CurvedMaxAccel, shootPosition, dirTowards);
+            let hasBall = this.robot.hasBall(World.Ball, 0.1);
+            if (hasBall && Math.abs(this.robot.dir - dirTowards) < 0.1) {
+                if (this.prep) {
+                    PenaltyOffensivePrepare.currentGameState = penaltyoffensiveprepare_1.GameState.Move;
+                    return;
+                }
+                this.robot.shoot(Math.random() * 6 + 4);
+                if (!this.robot.hasBall(World.Ball, 0.02)) {
+                    amun.log("!!!!!!!!!!!");
+                    if (Game.currentGameState == Game.GameState.BShoot) {
+                        Game.currentGameState = Game.GameState.BEnd;
                     }
-                    else {
-                        this.robot.shoot(10);
-                        if (!this.robot.hasBall(World.Ball, 0.02)) {
-                            amun.log("!!!!!!!!!!!");
-                            if (Game.currentGameState == Game.GameState.BShoot) {
-                                Game.currentGameState = Game.GameState.BEnd;
-                            }
-                            else
-                                Game.currentGameState = Game.GameState.YEnd;
-                            Game.shoots = Game.shoots + 1;
-                            amun.log(Game.shoots);
-                        }
-                    }
+                    else
+                        Game.currentGameState = Game.GameState.YEnd;
+                    Game.shoots = Game.shoots + 1;
                 }
             }
-            function clacDirTowards(pos, robot) {
+            function calcDirTowards(pos, robot) {
                 return Math.atan2(pos.y - robot.pos.y, pos.x - robot.pos.x);
             }
         }

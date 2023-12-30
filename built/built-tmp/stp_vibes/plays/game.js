@@ -28,7 +28,6 @@ define(["require", "exports", "base/world", "stp_vibes/tactics/dance", "stp_vibe
                     exports.currentGameState = GameState.Dance;
                 }
             }
-            amun.log("GS: " + exports.currentGameState);
             switch (exports.currentGameState) {
                 case GameState.NULL: {
                     new startformation_1.StartFormation().run();
