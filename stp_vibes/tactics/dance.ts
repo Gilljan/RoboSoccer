@@ -34,7 +34,24 @@ export class Dance {
                         return;
                     }
 
-                    const vec = this.calcRotatedPos(index, false);
+                    const vec = this.calcRotatedPos(index, false, 2);
+
+                    // Use the count variable to control the rotation
+                    const orientation = count * (index / this.robots.length) * 360;
+
+                    skill.run(vec, 0);
+                });
+                break;
+            }
+            case DancePhase.CircleGrowing: {
+                this.robots.forEach((value, index, array) => {
+                    const skill = new MoveTo(value);
+
+                    if (this.moveKeeper(value, index)) {
+                        return;
+                    }
+
+                    const vec = this.calcRotatedPos(index, false, 2 + Math.cos(count / 500));
 
                     // Use the count variable to control the rotation
                     const orientation = count * (index / this.robots.length) * 360;
@@ -51,7 +68,7 @@ export class Dance {
                         return;
                     }
 
-                    const vec = this.calcRotatedPos(index, true);
+                    const vec = this.calcRotatedPos(index, true, 2);
 
                     // Use the count variable to control the rotation
                     const orientation = count * (index / this.robots.length) * 360;
@@ -82,10 +99,9 @@ export class Dance {
         return false;
     }
 
-    calcRotatedPos(index: number, reverse: boolean): Vector {
+    calcRotatedPos(index: number, reverse: boolean, radius: number): Vector {
         // Calculate the position in a circle around the center
         const angle = ((index + (reverse ? -count : count) / 500) / this.robots.length) * 2 * Math.PI;
-        const radius = 2 + Math.cos(count / 500);
 
         const x = centerX + radius * Math.cos(angle);
         const y = centerY + radius * Math.sin(angle);
